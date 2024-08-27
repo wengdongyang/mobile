@@ -2,10 +2,11 @@
   "easycom": {
     "autoscan": true,
     "custom": {
+      "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue",
       "^uv-(.*)": "@climblee/uv-ui/components/uv-$1/uv-$1.vue"
     }
   },
-  "pages": [{ "path": "pages/index/index", "style": { "navigationBarTitleText": "登录" } }],
+  "pages": [{ "path": "pages/home/home", "style": { "navigationBarTitleText": "小镇在线" } }],
   "globalStyle": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "uni-app",

@@ -1,9 +1,6 @@
 <!-- @format -->
 <template>
-  <view class="index-layout">
-    <uv-icon name="photo"></uv-icon>
-    {{ title }}
-  </view>
+  <view class="home-layout"> </view>
 </template>
 
 <script setup>
@@ -15,6 +12,7 @@ import { onLoad, onShow, onHide } from '@dcloudio/uni-app';
 // stores
 // configs
 // components
+import Image from './WechatIMG2.jpg';
 const title = ref('Hello');
 
 onLoad(option => {
@@ -27,5 +25,5 @@ onLoad(option => {
 });
 </script>
 <style lang="scss" scoped>
-@import './index.scss';
+@import './home.scss';
 </style>

@@ -1,21 +1,23 @@
-<script>
+<script setup>
+import { onLaunch, onShow, onHide } from '@dcloudio/uni-app';
 // apis
 // hooks
 // utils
 // stores
+import { useRegionList } from '@src/stores';
 // configs
 // components
-export default {
-  onLaunch() {
-    console.log('App Launch');
-  },
-  onShow() {
-    console.log('App Show');
-  },
-  onHide() {
-    console.log('App Hide');
-  },
-};
+const { getRegionList } = useRegionList();
+onLaunch(() => {
+  console.info('App Launch');
+});
+onShow(() => {
+  console.info('App Show');
+  getRegionList();
+});
+onLaunch(() => {
+  console.info('App Hide');
+});
 </script>
 
 <style>

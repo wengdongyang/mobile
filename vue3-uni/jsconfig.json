@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "paths": { "@src/*": ["./src/*"] },
+    "types": ["@dcloudio/types", "miniprogram-api-typings", "mini-types"]
+  },
+  "exclude": ["node_modules", "dist"]
+}
