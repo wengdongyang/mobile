@@ -1,3 +1,5 @@
+<!-- @format -->
+
 <script setup>
 import { onLaunch, onShow, onHide } from '@dcloudio/uni-app';
 // apis
@@ -15,11 +17,11 @@ onShow(() => {
   console.info('App Show');
   getRegionList();
 });
-onLaunch(() => {
+onHide(() => {
   console.info('App Hide');
 });
 </script>
 
-<style>
+<style lang="scss">
 /*每个页面公共css */
 </style>

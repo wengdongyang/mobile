@@ -10,10 +10,13 @@ import { onLoad, onShow, onHide } from '@dcloudio/uni-app';
 // hooks
 // utils
 // stores
+import { useRegionList } from '@src/stores';
 // configs
 // components
 import Image from './WechatIMG2.jpg';
 const title = ref('Hello');
+
+const { regionList, regionNo, regionName, activeRegion, getRegionList, setActiveRegion } = useRegionList();
 
 onLoad(option => {
   if (option.auth) {

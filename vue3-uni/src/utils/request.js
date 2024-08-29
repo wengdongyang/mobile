@@ -9,39 +9,19 @@ import axiosAdapterUniapp from 'axios-adapter-uniapp';
 // components
 // const baseURL = '/town';
 
-// const request = config => {
-//   const { url, headers } = config;
-
-//   let nextConfig = {};
-//   console.error(url);
-//   if (['/sys/region/list'].includes(url)) {
-//     nextConfig = config;
-//   } else {
-//     const regionNo = uni.getStorageSync('regionNo');
-//     const token = uni.getStorageSync('token');
-//     if (!token) {
-//       console.error(`token 不存在!`, token);
-//       return;
-//     }
-//     if (!regionNo) {
-//       console.error(`regionNo 不存在!`, regionNo);
-//       return;
-//     }
-//     nextConfig = Object.assign({}, config, {
-//       headers: Object.assign({ 'X-RegionNo': regionNo, Authorization: token ? `Bearer ${token}` : '' }, headers),
-//     });
-//   }
-//   return uni.request(
-//     Object.assign({}, nextConfig, {
-//       url: `${baseURL}${url}`,
-//     }),
-//   );
-// };
+/* #ifdef H5 */
+const request = axios.create({
+  timeout: 1000 * 10,
+  baseURL: 'https://wj.ikeqiao.net/town/api',
+});
+/* #endif */
+/* #ifdef MP-WEIXIN */
 const request = axios.create({
   timeout: 1000 * 10,
   baseURL: 'https://wj.ikeqiao.net/town/api',
   adapter: axiosAdapterUniapp,
 });
+/* #endif */
 // 请求拦截器
 request.interceptors.request.use(
   config => {

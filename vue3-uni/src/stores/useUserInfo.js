@@ -9,31 +9,32 @@ import { apiGetSysRegionList } from '@src/apis';
 // stores
 // configs
 // components
-export const useRegionList = defineStore('userInfo', () => {
-  const REGION_LIST = ref([]);
-
-  const regionList = computed(() => {
-    try {
-      const nextRegionList = lodash.cloneDeep(REGION_LIST.value);
-      return nextRegionList;
-    } catch (error) {
-      console.warn(error);
-      return [];
-    }
-  });
-
-  const getRegionList = async () => {
-    try {
-      const { code, data, msg } = await apiGetSysRegionList({ orgLevel: 5 });
-      if (code === 200 && data.length > 0) {
-        REGION_LIST.value = data;
-      } else {
-        uni.showToast({ icon: 'none', title: msg });
+export const useUserInfo = defineStore(
+  'userInfo',
+  () => {
+    const REGION_LIST = ref([]);
+    const regionList = computed(() => {
+      try {
+        const nextRegionList = lodash.cloneDeep(REGION_LIST.value);
+        return nextRegionList;
+      } catch (error) {
+        console.warn(error);
+        return [];
       }
-    } catch (error) {
-      console.warn(error);
-    }
-  };
-
-  return { REGION_LIST, regionList, getRegionList };
-});
+    });
+    const getRegionList = async () => {
+      try {
+        const { code, data, msg } = await apiGetSysRegionList({ orgLevel: 5 });
+        if (code === 200 && data.length > 0) {
+          REGION_LIST.value = data;
+        } else {
+          uni.showToast({ icon: 'none', title: msg });
+        }
+      } catch (error) {
+        console.warn(error);
+      }
+    };
+    return { REGION_LIST, regionList, getRegionList };
+  },
+  { persist: true },
+);
