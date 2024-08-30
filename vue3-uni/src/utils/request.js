@@ -26,13 +26,18 @@ const request = axios.create({
 request.interceptors.request.use(
   config => {
     const { headers = {}, url } = config;
+    const regionNo = uni.getStorageSync('regionNo');
+    const token = uni.getStorageSync('token');
 
-    // 不需要token的白名单
     if (['/sys/region/list'].includes(url)) {
+      // 不需要token && regionNo的白名单接口
       return config;
+    } else if (['/application/list'].includes(url)) {
+      // token && regionNo 可有可无的接口
+      return Object.assign({}, config, {
+        headers: Object.assign({}, regionNo ? { 'X-RegionNo': regionNo } : {}, token ? { Authorization: `Bearer ${token}` } : {}, headers),
+      });
     } else {
-      const regionNo = uni.getStorageSync('regionNo');
-      const token = uni.getStorageSync('token');
       if (!token) {
         console.error(`token 不存在!`, token);
         return;
@@ -41,11 +46,9 @@ request.interceptors.request.use(
         console.error(`regionNo 不存在!`, regionNo);
         return;
       }
-      return Promise.resolve(
-        Object.assign({}, config, {
-          headers: Object.assign({ 'X-RegionNo': regionNo, Authorization: token ? `Bearer ${token}` : '' }, headers),
-        }),
-      );
+      return Object.assign({}, config, {
+        headers: Object.assign({ 'X-RegionNo': regionNo, Authorization: token ? `Bearer ${token}` : '' }, headers),
+      });
     }
   },
   error => {
@@ -55,7 +58,7 @@ request.interceptors.request.use(
 // 请求完成后的拦截器
 request.interceptors.response.use(
   async response => {
-    console.error(response);
+    console.warn(response);
     const { status, data } = response;
     if (status === 200) {
       return Promise.resolve(data);

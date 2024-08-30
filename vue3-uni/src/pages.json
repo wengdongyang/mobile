@@ -6,11 +6,34 @@
       "^uv-(.*)": "@climblee/uv-ui/components/uv-$1/uv-$1.vue"
     }
   },
-  "pages": [{ "path": "pages/home/home", "style": { "navigationBarTitleText": "小镇在线" } }],
+  "pages": [
+    { "path": "pages/home/home", "style": { "navigationBarTitleText": "首页" } },
+    { "path": "pages/mine/mine", "style": { "navigationBarTitleText": "我的" } }
+  ],
   "globalStyle": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "uni-app",
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#899096",
+    "selectedColor": "#A19185",
+    "borderStyle": "white",
+    "backgroundColor": "#FFFFFF",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "./static/tab/tab-icon-home-default.png",
+        "selectedIconPath": "./static/tab/tab-icon-home-active.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "./static/tab/tab-icon-mine-default.png",
+        "selectedIconPath": "./static/tab/tab-icon-mine-active.png"
+      }
+    ]
   }
 }

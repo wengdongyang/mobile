@@ -15,7 +15,6 @@ export const useRegionList = defineStore(
     const REGION_LIST = ref([]);
 
     const REGION_NO = ref('');
-    const REGION_NAME = ref('');
 
     const regionList = computed(() => {
       try {
@@ -28,7 +27,17 @@ export const useRegionList = defineStore(
     });
 
     const regionNo = computed(() => REGION_NO.value);
-    const regionName = computed(() => REGION_NAME.value);
+    const regionName = computed(() => {
+      try {
+        const nextRegionList = lodash.cloneDeep(REGION_LIST.value);
+        const regionNo = REGION_NO.value;
+        const activeRegionItem = nextRegionList.find(region => region.regionCode === regionNo) || {};
+        return lodash.get(activeRegionItem, ['regionName']) || '';
+      } catch (error) {
+        console.warn(error);
+        return '';
+      }
+    });
 
     const activeRegion = computed(() => {
       try {
@@ -45,29 +54,26 @@ export const useRegionList = defineStore(
 
     const getRegionList = async () => {
       try {
-        const nextRegionList = lodash.cloneDeep(REGION_LIST.value);
-        if (nextRegionList.length === 0) {
-          const { code, data, msg } = await apiGetSysRegionList({ orgLevel: 5 });
-          if (code === 200 && data.length > 0) {
-            REGION_LIST.value = data;
-            REGION_NO.value = '';
-            REGION_NAME.value = '';
-          } else {
-            uni.showToast({ icon: 'none', title: msg });
-          }
+        const { code, data, msg } = await apiGetSysRegionList({ orgLevel: 5 });
+        if (code === 200 && data.length > 0) {
+          REGION_LIST.value = data;
+          REGION_NO.value = '';
+        } else {
+          uni.showToast({ icon: 'none', title: msg });
         }
       } catch (error) {
         console.warn(error);
       }
     };
-    const setActiveRegion = async regionNo => {
+    const setActiveRegion = regionNo => {
       try {
+        uni.setStorageSync('regionNo', regionNo);
         REGION_NO.value = regionNo;
       } catch (error) {
         console.warn(error);
       }
     };
-    return { REGION_LIST, REGION_NO, REGION_NAME, regionList, regionNo, regionName, activeRegion, getRegionList, setActiveRegion };
+    return { REGION_LIST, REGION_NO, regionList, regionNo, regionName, activeRegion, getRegionList, setActiveRegion };
   },
   { persist: true },
 );
