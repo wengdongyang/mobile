@@ -1,20 +1,8 @@
 <template>
   <view class="home-layout">
-    home
-
-    <uv-icon
-      name="photo"
-      size="30"
-      color="#909399"
-    ></uv-icon>
-    <uv-qrcode
-      ref="qrcode"
-      size="300px"
-      value="https://h5.uvui.cn"
-    ></uv-qrcode>
-    000
-    {{ regionList }}
-    999
+    <uv-button type="primary" text="确定"></uv-button>
+    <uv-icon name="photo" size="30" color="#909399"></uv-icon>
+    <uv-qrcode ref="qrcode" size="300px" value="https://h5.uvui.cn"></uv-qrcode>
     <!-- 街道 -->
     <view class="header-content"></view>
     <!-- 登陆 -->
@@ -23,11 +11,8 @@
     <view class="application-content"></view>
     <!-- news -->
     <view class="news-content"></view>
-    <SwitchRegionModal
-      v-if="regionList.length > 0"
-      :ref="ref => (switchRegionModalRef = ref)"
-      @selectRegion="onSelectRegion"
-    />
+    <SwitchRegionModal v-if="regionList.length > 0" :ref="ref => (switchRegionModalRef = ref)"
+      @selectRegion="onSelectRegion" />
   </view>
 </template>
 
