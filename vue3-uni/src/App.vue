@@ -6,16 +6,13 @@ import { onLaunch, onShow, onHide } from '@dcloudio/uni-app';
 // hooks
 // utils
 // stores
-import { useRegionList } from '@src/stores';
 // configs
 // components
-const { getRegionList } = useRegionList();
 onLaunch(() => {
   console.info('App Launch');
 });
 onShow(() => {
   console.info('App Show');
-  getRegionList();
 });
 onHide(() => {
   console.info('App Hide');
