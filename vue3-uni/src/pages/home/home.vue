@@ -1,6 +1,8 @@
 <template>
   <view class="home-layout">
+    ???
     <uv-button type="primary" text="确定"></uv-button>
+    ???
     <uv-icon name="photo" size="30" color="#909399"></uv-icon>
     <uv-qrcode ref="qrcode" size="300px" value="https://h5.uvui.cn"></uv-qrcode>
     <!-- 街道 -->
@@ -11,8 +13,6 @@
     <view class="application-content"></view>
     <!-- news -->
     <view class="news-content"></view>
-    <SwitchRegionModal v-if="regionList.length > 0" :ref="ref => (switchRegionModalRef = ref)"
-      @selectRegion="onSelectRegion" />
   </view>
 </template>
 
@@ -27,7 +27,6 @@ import { apiGetApplicationList } from '@src/apis';
 import { useRegionList } from '@src/stores';
 // configs
 // components
-import SwitchRegionModal from './components/switchRegionModal/index.vue';
 const { regionList, regionNo } = useRegionList();
 
 const applicationList = ref([]);
