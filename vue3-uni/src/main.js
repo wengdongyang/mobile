@@ -1,3 +1,5 @@
+import 'uno.css';
+
 import { createSSRApp } from 'vue';
 import * as Pinia from 'pinia';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
