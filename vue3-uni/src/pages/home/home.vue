@@ -8,7 +8,6 @@
     <view class="application-content"></view>
     <!-- news -->
     <view class="news-content"></view>
-    <uv-qrcode ref="qrcode" size="300px" value="https://h5.uvui.cn"></uv-qrcode>
   </view>
 </template>
 
@@ -22,7 +21,6 @@ import { apiGetApplicationList } from '@src/apis';
 // stores
 // configs
 // components
-
 </script>
 <style lang="scss" scoped>
 @import './home.scss';
