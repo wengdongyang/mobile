@@ -7,7 +7,7 @@
     <!-- app -->
     <view class="application-content"></view>
     <!-- news -->
-    <view class="news-content"></view>
+    <view class="news-content text-center">999</view>
   </view>
 </template>
 

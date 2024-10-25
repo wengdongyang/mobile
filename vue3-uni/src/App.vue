@@ -4,12 +4,15 @@
 import { onLaunch, onShow, onHide } from '@dcloudio/uni-app';
 // apis
 // hooks
+import { useEnv } from '@src/hooks';
 // utils
 // stores
 // configs
 // components
+const { initEnv } = useEnv();
 onLaunch(() => {
   console.info('App Launch');
+  initEnv();
 });
 onShow(() => {
   console.info('App Show');
