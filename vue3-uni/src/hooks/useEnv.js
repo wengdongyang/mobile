@@ -1,4 +1,3 @@
-/** @format */
 import { defineStore } from 'pinia';
 // apis
 // hooks
@@ -9,7 +8,8 @@ import { defineStore } from 'pinia';
 export const useEnv = () => {
   const BASE_URL_TEST = import.meta.env.VITE_BASE_URL_TEST;
   const BASE_URL_PROD = import.meta.env.VITE_BASE_URL_PROD;
-  const envVersion = __wxConfig.envVersion;
+  // const envVersion = __wxConfig.envVersion;
+  const envVersion = 'develop';
 
   const initEnv = () => {
     try {

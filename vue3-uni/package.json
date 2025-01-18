@@ -87,5 +87,27 @@
     "unocss-preset-weapp": "^0.62.2",
     "vite": "5.2.8"
   },
+  "uni-app": {
+    "scripts": {
+      "shaoXing": {
+        "title": "绍兴环境",
+        "env": {
+          "UNI_PLATFORM": "h5"
+        },
+        "define": {
+          "IS_SHAO_XING": true
+        }
+      },
+      "keQiao": {
+        "title": "柯桥环境",
+        "env": {
+          "UNI_PLATFORM": "h5"
+        },
+        "define": {
+          "IS_KE_QIAO": true
+        }
+      }
+    }
+  },
   "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
 }

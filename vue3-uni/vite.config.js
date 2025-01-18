@@ -3,11 +3,19 @@ import { defineConfig } from 'vite';
 import { fileURLToPath, URL } from 'node:url';
 import uni from '@dcloudio/vite-plugin-uni';
 import vueJsx from '@vitejs/plugin-vue-jsx';
-// https://vitejs.dev/config/
 export default defineConfig(async () => {
   const UnoCss = await import('unocss/vite').then(i => i.default);
   return {
     plugins: [uni(), UnoCss(), vueJsx()],
+    css: {
+      preprocessorOptions: {
+        scss: {
+          quietDeps: true,
+          api: 'modern-compiler',
+          silenceDeprecations: ['legacy-js-api'],
+        },
+      },
+    },
     resolve: {
       alias: {
         '@src': fileURLToPath(new URL('./src', import.meta.url)),

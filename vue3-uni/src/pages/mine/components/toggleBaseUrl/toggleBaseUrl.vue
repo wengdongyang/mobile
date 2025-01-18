@@ -18,7 +18,7 @@
   />
 </template>
 
-<script setup>
+<script lang="jsx" setup>
 import { onLoad, onShow } from '@dcloudio/uni-app';
 import { ref, watch, computed } from 'vue';
 // apis
@@ -27,8 +27,9 @@ import { ref, watch, computed } from 'vue';
 // stores
 // configs
 // components
-const envVersion = __wxConfig.envVersion;
+// const envVersion = __wxConfig.envVersion;
 
+const envVersion = '';
 const actionSheetRef = ref();
 
 const baseUrlList = uni.getStorageSync('BASE_URL_LIST') || [];

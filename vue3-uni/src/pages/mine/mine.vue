@@ -4,7 +4,7 @@
   </view>
 </template>
 
-<script setup>
+<script lang="jsx" setup>
 import { onLoad, onShow } from '@dcloudio/uni-app';
 import { ref, watch } from 'vue';
 // apis
@@ -16,5 +16,5 @@ import { ref, watch } from 'vue';
 import ToggleBaseUrl from './components/toggleBaseUrl/toggleBaseUrl';
 </script>
 <style lang="scss" scoped>
-@import './mine.scss';
+@use './mine.scss';
 </style>

@@ -1,6 +1,6 @@
 <!-- @format -->
 
-<script setup>
+<script lang="jsx" setup>
 import { onLaunch, onShow, onHide } from '@dcloudio/uni-app';
 // apis
 // hooks
@@ -10,6 +10,7 @@ import { useEnv } from '@src/hooks';
 // configs
 // components
 const { initEnv } = useEnv();
+
 onLaunch(() => {
   console.info('App Launch');
   initEnv();
@@ -24,5 +25,5 @@ onHide(() => {
 
 <style lang="scss">
 /*每个页面公共css */
-@import '@climblee/uv-ui/index.scss';
+@use '@climblee/uv-ui/index.scss';
 </style>

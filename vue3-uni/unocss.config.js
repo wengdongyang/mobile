@@ -5,12 +5,6 @@ const { presetWeappAttributify, transformerAttributify } = extractorAttributify(
 
 export default {
   presets: [presetWeapp(), presetWeappAttributify()],
-  shortcuts: [
-    {
-      'border-base': 'border border-gray-500_10',
-      center: 'flex justify-center items-center',
-    },
-  ],
-
+  shortcuts: [],
   transformers: [transformerAttributify(), transformerClass()],
 };

@@ -1,3 +1,11 @@
 .index-layout {
   height: 100vh;
 }
+
+// #ifdef TARGET="绍兴市"
+.header-content {
+  width: 20rpx;
+  height: 20rpx;
+  background-color: #000;
+}
+// #endif

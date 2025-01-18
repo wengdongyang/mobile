@@ -16,7 +16,7 @@
   </uv-action-sheet>
 </template>
 
-<script setup>
+<script lang="jsx" setup>
 import { debounce } from 'lodash';
 import { ref, onMounted } from 'vue';
 // apis
@@ -59,5 +59,5 @@ defineExpose({
 });
 </script>
 <style lang="scss" scoped>
-@import './index.scss';
+@use './index.scss';
 </style>

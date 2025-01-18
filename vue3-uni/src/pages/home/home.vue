@@ -1,7 +1,12 @@
 <template>
   <view class="home-layout">
     <!-- 街道 -->
-    <view class="header-content"></view>
+    <!-- #ifdef IS_SHAO_XING -->
+    <view class="header-content">IS_SHAO_XING</view>
+    <!-- #endif -->
+    <!-- #ifdef IS_KE_QIAO -->
+    <view class="header-content">IS_KE_QIAO</view>
+    <!-- #endif -->
     <!-- 登陆 -->
     <view class="user-content"></view>
     <!-- app -->
@@ -11,7 +16,7 @@
   </view>
 </template>
 
-<script setup>
+<script lang="jsx" setup>
 import { onLoad, onShow } from '@dcloudio/uni-app';
 import { ref, watch } from 'vue';
 // apis
@@ -21,7 +26,13 @@ import { apiGetApplicationList } from '@src/apis';
 // stores
 // configs
 // components
+// #ifdef IS_SHAO_XING
+console.error('8888,绍兴市');
+// #endif
+// #ifdef IS_KE_QIAO
+console.error('8888,柯桥区');
+// #endif
 </script>
 <style lang="scss" scoped>
-@import './home.scss';
+@use './home.scss';
 </style>

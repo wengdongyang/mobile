@@ -6,7 +6,7 @@
   </uv-action-sheet>
 </template>
 
-<script setup>
+<script lang="jsx" setup>
 import { ref, computed } from 'vue';
 import { onLoad, onShow, onHide } from '@dcloudio/uni-app';
 // apis
@@ -31,5 +31,5 @@ onLoad(option => {
 });
 </script>
 <style lang="scss" scoped>
-@import './home.scss';
+@use './home.scss';
 </style>
