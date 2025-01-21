@@ -1,19 +1,5 @@
 <template>
-  <uv-action-sheet
-    :ref="ref => (actionSheetRef = ref)"
-    title="选择街道"
-    safeAreaInsetBottom
-  >
-    <view class="region-list">
-      <view
-        v-for="region in regionList"
-        :key="region.regionCode"
-        @click="() => onSelectRegion(region.regionCode)"
-      >
-        {{ region.regionName }}
-      </view>
-    </view>
-  </uv-action-sheet>
+  <view>999</view>
 </template>
 
 <script lang="jsx" setup>

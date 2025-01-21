@@ -12,13 +12,13 @@ import axiosAdapterUniapp from 'axios-adapter-uniapp';
 /* #ifdef H5 */
 const request = axios.create({
   timeout: 1000 * 10,
-  baseURL: 'https://wj.ikeqiao.net/town/api',
+  baseURL: 'https://zsjc.ikeqiao.net:8888',
 });
 /* #endif */
 /* #ifdef MP-WEIXIN */
 const request = axios.create({
   timeout: 1000 * 10,
-  baseURL: 'https://wj.ikeqiao.net/town/api',
+  baseURL: 'https://zsjc.ikeqiao.net:8888',
   adapter: axiosAdapterUniapp,
 });
 /* #endif */

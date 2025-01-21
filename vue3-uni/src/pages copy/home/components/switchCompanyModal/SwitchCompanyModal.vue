@@ -1,9 +1,5 @@
 <template>
-  <uv-action-sheet
-    ref="actionSheetRef"
-    title="开放能力"
-  >
-  </uv-action-sheet>
+  <view>999</view>
 </template>
 
 <script lang="jsx" setup>

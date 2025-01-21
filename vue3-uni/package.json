@@ -2,6 +2,7 @@
   "name": "uni-preset-vue",
   "version": "0.0.0",
   "scripts": {
+    "fs": "node src/templates/index.js",
     "dev:app": "uni -p app",
     "dev:app-android": "uni -p app-android",
     "dev:app-ios": "uni -p app-ios",
@@ -42,7 +43,6 @@
     "build:quickapp-webview-union": "uni build -p quickapp-webview-union"
   },
   "dependencies": {
-    "@climblee/uv-ui": "^1.1.20",
     "@dcloudio/uni-app": "3.0.0-4020420240722002",
     "@dcloudio/uni-app-harmony": "3.0.0-4020420240722002",
     "@dcloudio/uni-app-plus": "3.0.0-4020420240722002",
@@ -71,7 +71,8 @@
     "pinia-plugin-persistedstate": "^4.0.0",
     "qs": "^6.13.0",
     "vue": "^3.4.21",
-    "vue-i18n": "^9.1.9"
+    "vue-i18n": "^9.1.9",
+    "wot-design-uni": "^1.6.1"
   },
   "devDependencies": {
     "@dcloudio/types": "^3.4.8",
@@ -81,7 +82,8 @@
     "@dcloudio/vite-plugin-uni": "3.0.0-4020420240722002",
     "@vitejs/plugin-vue-jsx": "^4.0.1",
     "@vue/runtime-core": "^3.4.21",
-    "sass": "^1.78.0",
+    "fs": "^0.0.1-security",
+    "sass": "~1.32.13",
     "sass-loader": "^16.0.1",
     "unocss": "^0.62.3",
     "unocss-preset-weapp": "^0.62.2",
@@ -89,22 +91,48 @@
   },
   "uni-app": {
     "scripts": {
-      "shaoXing": {
-        "title": "绍兴环境",
+      "weixinShaoXing": {
+        "title": "微信小程序&&绍兴环境",
         "env": {
-          "UNI_PLATFORM": "h5"
+          "UNI_PLATFORM": "mp-weixin"
         },
         "define": {
-          "IS_SHAO_XING": true
+          "IS_SHAO_XING": true,
+          "IS_KE_QIAO": false,
+          "TARGET": 3306
         }
       },
-      "keQiao": {
-        "title": "柯桥环境",
+      "weixinKeQiao": {
+        "title": "微信小程序&&柯桥环境",
+        "env": {
+          "UNI_PLATFORM": "mp-weixin"
+        },
+        "define": {
+          "IS_SHAO_XING": false,
+          "IS_KE_QIAO": true,
+          "TARGET": 330603
+        }
+      },
+      "dingdingShaoXing": {
+        "title": "浙政钉&&绍兴环境",
         "env": {
           "UNI_PLATFORM": "h5"
         },
         "define": {
-          "IS_KE_QIAO": true
+          "IS_SHAO_XING": true,
+          "IS_KE_QIAO": false,
+          "TARGET": 3306
+        }
+      },
+      "dingdingKeQiao": {
+        "title": "浙政钉&&柯桥环境",
+        "env": {
+          "UNI_PLATFORM": "h5"
+        },
+        "define": {
+          "IS_SHAO_XING": false,
+          "IS_KE_QIAO": true,
+          "TARGET": 330603
         }
       }
     }

@@ -7,15 +7,7 @@ export default defineConfig(async () => {
   const UnoCss = await import('unocss/vite').then(i => i.default);
   return {
     plugins: [uni(), UnoCss(), vueJsx()],
-    css: {
-      preprocessorOptions: {
-        scss: {
-          quietDeps: true,
-          api: 'modern-compiler',
-          silenceDeprecations: ['legacy-js-api'],
-        },
-      },
-    },
+    css: {},
     resolve: {
       alias: {
         '@src': fileURLToPath(new URL('./src', import.meta.url)),

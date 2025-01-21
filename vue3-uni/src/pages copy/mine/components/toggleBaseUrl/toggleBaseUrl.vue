@@ -1,21 +1,5 @@
 <template>
-  <uv-list
-    v-if="envVersion !== 'release'"
-    border
-  >
-    <uv-list-item
-      title="环境切换"
-      :rightText="activeEnvironmentName"
-      :clickable="true"
-      :show-arrow="true"
-      @click="onClickToggleEnvironment"
-    />
-  </uv-list>
-  <uv-action-sheet
-    ref="actionSheetRef"
-    :actions="baseUrlList.map(el => ({ name: `${el.name}` }))"
-    title="标题"
-  />
+  <view>999</view>
 </template>
 
 <script lang="jsx" setup>
