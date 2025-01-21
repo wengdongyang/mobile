@@ -16,4 +16,6 @@ import { computed, ref, watch } from 'vue';
 // refs
 // computed
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@use './render-mine-weixin-ke-qiao.scss';
+</style>

@@ -2,7 +2,7 @@
   "name": "uni-preset-vue",
   "version": "0.0.0",
   "scripts": {
-    "fs": "node src/templates/index.js",
+    "fs": "node templates/index.js",
     "dev:app": "uni -p app",
     "dev:app-android": "uni -p app-android",
     "dev:app-ios": "uni -p app-ios",
@@ -98,8 +98,7 @@
         },
         "define": {
           "IS_SHAO_XING": true,
-          "IS_KE_QIAO": false,
-          "TARGET": 3306
+          "IS_KE_QIAO": false
         }
       },
       "weixinKeQiao": {
@@ -109,8 +108,7 @@
         },
         "define": {
           "IS_SHAO_XING": false,
-          "IS_KE_QIAO": true,
-          "TARGET": 330603
+          "IS_KE_QIAO": true
         }
       },
       "dingdingShaoXing": {
@@ -120,8 +118,7 @@
         },
         "define": {
           "IS_SHAO_XING": true,
-          "IS_KE_QIAO": false,
-          "TARGET": 3306
+          "IS_KE_QIAO": false
         }
       },
       "dingdingKeQiao": {
@@ -131,8 +128,7 @@
         },
         "define": {
           "IS_SHAO_XING": false,
-          "IS_KE_QIAO": true,
-          "TARGET": 330603
+          "IS_KE_QIAO": true
         }
       }
     }
