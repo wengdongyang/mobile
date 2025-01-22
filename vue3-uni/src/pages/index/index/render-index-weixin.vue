@@ -1,5 +1,8 @@
 <template>
-  <view class="render-index-weixin-layout"> render-index-weixin </view>
+  <view class="render-index-weixin-layout">
+    <!-- 顶部banner -->
+    <render-banner />
+  </view>
 </template>
 <script lang="jsx" setup>
 import { onLoad, onShow } from '@dcloudio/uni-app';
@@ -11,6 +14,7 @@ import { computed, ref, watch } from 'vue';
 // stores
 // configs
 // components
+import RenderBanner from './components/render-banner.vue';
 // props
 // emits
 // refs

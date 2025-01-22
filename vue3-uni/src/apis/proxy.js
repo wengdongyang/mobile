@@ -1,4 +1,3 @@
-/** @format */
 // apis
 // hooks
 // utils

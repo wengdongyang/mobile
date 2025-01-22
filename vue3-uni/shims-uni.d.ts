@@ -1,5 +1,3 @@
-/** @format */
-
 /// <reference types='@dcloudio/types' />
 import 'vue';
 

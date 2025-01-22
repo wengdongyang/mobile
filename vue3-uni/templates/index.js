@@ -1,20 +1,23 @@
 const path = require('path');
+const lodash = require('lodash');
 // apis
 // hooks
 // utils
 const { mkdirSync, writeFileSync } = require('./utils.js');
-const { templateIndexVue, templateClientComponentVue } = require('./templateFile.js');
+const { templateIndexVue, templateClientComponentVue, templateScss } = require('./templateFile.js');
 // stores
 // mixins
 // configs
-const { pages, otherPagesInfo } = require('./pages.js');
+const { pages, otherPagesInfo, CLIENT_TARGET } = require('./pages.js');
 // components
+const { kebabCase } = lodash;
 
 pages.forEach(async page => {
+  const { path: pagePath, clients = [], components = [] } = page;
   const basePath = `src`;
-  const pagePaths = page.path.split('/');
+  const pagePaths = pagePath.split('/');
   const folderPaths = pagePaths.filter((pagePath, index) => index !== 0);
-  const fileName = pagePaths[pagePaths.length - 1];
+  const fileName = kebabCase(pagePaths[pagePaths.length - 1]);
 
   folderPaths.reduce((prev, item) => {
     const nextPath = path.join(basePath, `${prev}/${item}`);
@@ -24,34 +27,33 @@ pages.forEach(async page => {
     return `${prev}/${item}`;
   }, '/pages');
 
-  mkdirSync(`${basePath}/${page.path}/components`);
-  writeFileSync(`${basePath}/${page.path}/components/.gitkeep`, 'null not found', true);
+  mkdirSync(`${basePath}/${pagePath}/components`);
+  writeFileSync(`${basePath}/${pagePath}/components/.gitkeep`, 'null not found', true);
+  mkdirSync(`${basePath}/${pagePath}/assets`);
+  mkdirSync(`${basePath}/${pagePath}/assets/images`);
+  writeFileSync(`${basePath}/${pagePath}/assets/.gitkeep`, 'null not found', true);
+  writeFileSync(`${basePath}/${pagePath}/assets/images/.gitkeep`, 'null not found', true);
 
-  writeFileSync(`${basePath}/${page.path}/index.vue`, templateIndexVue({ name: fileName }));
+  writeFileSync(`${basePath}/${pagePath}/index.vue`, templateIndexVue({ name: fileName }));
 
-  writeFileSync(`${basePath}/${page.path}/render-${fileName}-default.vue`, templateClientComponentVue({ name: `render-${fileName}-default` }));
-  writeFileSync(`${basePath}/${page.path}/render-${fileName}-default.scss`, '');
+  Object.values(CLIENT_TARGET).forEach(clientTarget => {
+    if (clients.includes(clientTarget)) {
+      writeFileSync(`${basePath}/${pagePath}/render-${fileName}-${clientTarget}.scss`, templateScss({ path: pagePath }), true);
+      writeFileSync(`${basePath}/${pagePath}/render-${fileName}-${clientTarget}.vue`, templateClientComponentVue({ pagePath, name: `render-${fileName}-${clientTarget}` }));
+    }
+  });
 
-  writeFileSync(`${basePath}/${page.path}/render-${fileName}-dingding.scss`, '');
-  writeFileSync(`${basePath}/${page.path}/render-${fileName}-dingding-ke-qiao.scss`, '');
-  writeFileSync(`${basePath}/${page.path}/render-${fileName}-dingding-shao-xing.scss`, '');
-  writeFileSync(`${basePath}/${page.path}/render-${fileName}-dingding.vue`, templateClientComponentVue({ name: `render-${fileName}-dingding` }));
-  writeFileSync(`${basePath}/${page.path}/render-${fileName}-dingding-ke-qiao.vue`, templateClientComponentVue({ name: `render-${fileName}-dingding-ke-qiao` }));
-  writeFileSync(`${basePath}/${page.path}/render-${fileName}-dingding-shao-xing.vue`, templateClientComponentVue({ name: `render-${fileName}-dingding-shao-xing` }));
-
-  writeFileSync(`${basePath}/${page.path}/render-${fileName}-weixin.scss`, '');
-  writeFileSync(`${basePath}/${page.path}/render-${fileName}-weixin-ke-qiao.scss`, '');
-  writeFileSync(`${basePath}/${page.path}/render-${fileName}-weixin-shao-xing.scss`, '');
-  writeFileSync(`${basePath}/${page.path}/render-${fileName}-weixin.vue`, templateClientComponentVue({ name: `render-${fileName}-weixin` }));
-  writeFileSync(`${basePath}/${page.path}/render-${fileName}-weixin-ke-qiao.vue`, templateClientComponentVue({ name: `render-${fileName}-weixin-ke-qiao` }));
-  writeFileSync(`${basePath}/${page.path}/render-${fileName}-weixin-shao-xing.vue`, templateClientComponentVue({ name: `render-${fileName}-weixin-shao-xing` }));
+  components.forEach(componentName => {
+    writeFileSync(`${basePath}/${pagePath}/components/${kebabCase(componentName)}.scss`, templateScss({ path: pagePath }), true);
+    writeFileSync(`${basePath}/${pagePath}/components/${kebabCase(componentName)}.vue`, templateClientComponentVue({ pagePath, name: `${kebabCase(componentName)}` }));
+  });
 });
 
 writeFileSync(
   `src/pages.json`,
   JSON.stringify(
     Object.assign({}, otherPagesInfo, {
-      pages: pages.map(page => Object.assign({}, page, { path: `${page.path}/index` })),
+      pages: pages.map(page => Object.assign({}, { path: `${page.path}/index`, style: page.style })),
     }),
   ),
   true,

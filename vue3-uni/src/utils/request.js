@@ -1,55 +1,33 @@
-/** @format */
 import axios from 'axios';
 import axiosAdapterUniapp from 'axios-adapter-uniapp';
+import { storeToRefs } from 'pinia';
 // apis
 // hooks
 // types
 // stores
+import { useStoreUserInfo } from '@src/stores';
 // configs
 // components
-// const baseURL = '/town';
 
+const origin = import.meta.env.VITE_LOCATION_ORIGIN;
+const baseURL = import.meta.env.VITE_BASE_URL;
 /* #ifdef H5 */
-const request = axios.create({
-  timeout: 1000 * 10,
-  baseURL: 'https://zsjc.ikeqiao.net:8888',
-});
+const request = axios.create({ timeout: 1000 * 10, baseURL });
 /* #endif */
 /* #ifdef MP-WEIXIN */
-const request = axios.create({
-  timeout: 1000 * 10,
-  baseURL: 'https://zsjc.ikeqiao.net:8888',
-  adapter: axiosAdapterUniapp,
-});
+const request = axios.create({ timeout: 1000 * 10, baseURL: `${origin}${baseURL}`, adapter: axiosAdapterUniapp });
 /* #endif */
+
 // 请求拦截器
 request.interceptors.request.use(
   config => {
     const { headers = {}, url } = config;
-    const regionNo = uni.getStorageSync('regionNo');
-    const token = uni.getStorageSync('token');
-
-    if (['/sys/region/list'].includes(url)) {
-      // 不需要token && regionNo的白名单接口
+    const storeUserInfo = useStoreUserInfo();
+    const { token } = storeToRefs(storeUserInfo);
+    if (['/proxy/getGoverDingConfig'].includes(url)) {
       return config;
-    } else if (['/application/list'].includes(url)) {
-      // token && regionNo 可有可无的接口
-      return Object.assign({}, config, {
-        headers: Object.assign({}, regionNo ? { 'X-RegionNo': regionNo } : {}, token ? { Authorization: `Bearer ${token}` } : {}, headers),
-      });
-    } else {
-      if (!token) {
-        console.error(`token 不存在!`, token);
-        return;
-      }
-      if (!regionNo) {
-        console.error(`regionNo 不存在!`, regionNo);
-        return;
-      }
-      return Object.assign({}, config, {
-        headers: Object.assign({ 'X-RegionNo': regionNo, Authorization: token ? `Bearer ${token}` : '' }, headers),
-      });
     }
+    return Object.assign({}, config, { headers: Object.assign({ token: token.value, platform: 'dingding' }, headers) });
   },
   error => {
     return Promise.reject(error);
@@ -58,7 +36,7 @@ request.interceptors.request.use(
 // 请求完成后的拦截器
 request.interceptors.response.use(
   async response => {
-    console.warn(response);
+    console.info(response);
     const { status, data } = response;
     if (status === 200) {
       return Promise.resolve(data);

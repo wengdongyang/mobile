@@ -20,13 +20,13 @@ const otherPagesInfo = {
     backgroundColor: '#FFFFFF',
     list: [
       {
-        pagePath: 'pages/home/home',
+        pagePath: 'pages/index/index/index',
         text: '首页',
         iconPath: './static/tab/tab-icon-home-default.png',
         selectedIconPath: './static/tab/tab-icon-home-active.png',
       },
       {
-        pagePath: 'pages/mine/mine',
+        pagePath: 'pages/mine/mine/index',
         text: '我的',
         iconPath: './static/tab/tab-icon-mine-default.png',
         selectedIconPath: './static/tab/tab-icon-mine-active.png',
@@ -35,23 +35,38 @@ const otherPagesInfo = {
   },
 };
 
+const CLIENT_TARGET = {
+  DEFAULT: 'default', // 全部通用
+  WEIXIN: 'weixin', // 微信小程序通用
+  WEIXIN_KE_QIAO: 'weixin-ke-qiao', // 微信小程序-柯桥
+  WEIXIN_SHAO_XING: 'weixin-shao-xing', // 微信小程序-绍兴
+  DINGDING: 'dingding', // 浙政钉H5通用
+  DINGDING_KE_QIAO: 'dingding-ke-qiao', // 浙政钉H5-柯桥
+  DINGDING_SHAO_XING: 'dingding-shao-xing', // 浙政钉H5-绍兴
+};
+
 const pages = [
   {
-    path: 'pages/index/index',
+    path: 'pages/login/index',
     style: { navigationBarTitleText: '登陆' },
+    clients: [CLIENT_TARGET.WEIXIN, CLIENT_TARGET.DINGDING],
   },
   {
-    path: 'pages/home/home',
+    path: 'pages/index/index',
     style: { navigationBarTitleText: '首页' },
+    clients: [CLIENT_TARGET.WEIXIN, CLIENT_TARGET.DINGDING],
+    components: ['renderBanner', 'renderInspection', 'renderStatistics', 'renderAction'],
   },
   {
     path: 'pages/mine/mine',
     style: { navigationBarTitleText: '我的' },
+    clients: [CLIENT_TARGET.WEIXIN, CLIENT_TARGET.DINGDING_KE_QIAO, CLIENT_TARGET.DINGDING_SHAO_XING],
   },
   {
     path: 'pages/mine/user-info',
     style: { navigationBarTitleText: '用户信息' },
+    clients: [CLIENT_TARGET.DEFAULT],
   },
 ];
 
-module.exports = { otherPagesInfo, pages };
+module.exports = { otherPagesInfo, pages, CLIENT_TARGET };

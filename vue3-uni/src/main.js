@@ -1,8 +1,8 @@
 import 'uno.css';
 
-import { createSSRApp } from 'vue';
 import * as Pinia from 'pinia';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
+import { createSSRApp } from 'vue';
 
 import App from './App.vue';
 export const createApp = () => {

@@ -1,0 +1,13 @@
+// #ifdef MP-WEIXIN
+// 微信小程序
+$file-server-path: 'https://sxaq.ikeqiao.net/oss/sx-safety-production-pro/mobile-file/';
+// #endif
+// #ifdef H5
+// 浙政钉H5
+$file-server-path: '@src/';
+// #endif
+
+@mixin background-image($page-path, $url) {
+  background-image: url($file-server-path + $page-path + '/' + $url);
+  background-repeat: no-repeat;
+}

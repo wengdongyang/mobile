@@ -1,1 +1,2 @@
-export * from './useRegionList';
+export * from './useDict';
+export * from './useUserInfo';
