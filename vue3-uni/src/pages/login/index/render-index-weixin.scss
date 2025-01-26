@@ -2,3 +2,20 @@
 $page-path: 'pages/login/index';
 // 图片demo
 // @include background-image($page-path, 'assets/images/yk_banner.png');
+
+.render-index-weixin-layout {
+  position: relative;
+  z-index: 0;
+
+  box-sizing: border-box;
+  height: 100vh;
+  padding: 0;
+
+  background-position: top center;
+  background-size: contain;
+
+  @include background-image($page-path, 'static/image/login_bg2.png');
+  .render-index-weixin-title {
+    font-size: 24rpx;
+  }
+}

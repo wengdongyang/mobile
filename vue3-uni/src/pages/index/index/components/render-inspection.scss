@@ -2,3 +2,25 @@
 $page-path: 'pages/index/index';
 // 图片demo
 // @include background-image($page-path, 'assets/images/yk_banner.png');
+
+.render-inspection-layout {
+  box-sizing: border-box;
+  width: 680rpx;
+
+  .inspection {
+    font-size: 36rpx;
+    font-weight: 500;
+    line-height: 160rpx;
+
+    box-sizing: border-box;
+    width: 680rpx;
+    height: 160rpx;
+    padding: 0 0 0 200rpx;
+
+    color: #fff;
+    background-image: url('../assets/images/inspection-bg.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% 100%;
+  }
+}

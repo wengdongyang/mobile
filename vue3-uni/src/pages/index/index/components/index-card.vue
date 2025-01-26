@@ -1,15 +1,14 @@
 <template>
-  <view class="render-banner-layout">
-    <image
-      class="banner"
-      :src="getImageUrl({ pagePath, url: 'assets/images/banner.jpg' })"
-    />
+  <view class="index-card-layout">
+    <view class="index-card-header">{{ title }}</view>
+    <view class="index-card-content">
+      <slot name="default" />
+    </view>
   </view>
 </template>
 <script lang="jsx" setup>
 // apis
 // hooks
-import { useImage } from '@src/hooks'; // utils
 // utils
 // stores
 // configs
@@ -17,12 +16,12 @@ import { useImage } from '@src/hooks'; // utils
 // props
 const props = defineProps({
   pagePath: { type: String, default: 'pages/index/index' },
+  title: { type: String }, // 标题
 });
 // emits
 // refs
 // computed
-const { getImageUrl } = useImage();
 </script>
 <style lang="scss" scoped>
-@use './render-banner.scss';
+@use './index-card.scss';
 </style>

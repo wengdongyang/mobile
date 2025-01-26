@@ -7,7 +7,6 @@ const otherPagesInfo = {
     },
   },
   globalStyle: {
-    navigationStyle: 'custom',
     navigationBarTextStyle: 'black',
     navigationBarBackgroundColor: '#F8F8F8',
     navigationBarTitleText: '基层智治综合应用·应急消防治理',
@@ -55,7 +54,7 @@ const pages = [
     path: 'pages/index/index',
     style: { navigationBarTitleText: '首页' },
     clients: [CLIENT_TARGET.WEIXIN, CLIENT_TARGET.DINGDING],
-    components: ['renderBanner', 'renderInspection', 'renderStatistics', 'renderAction'],
+    components: ['indexCard', 'renderBanner', 'renderInspection', 'renderStatistics', 'renderAction'],
   },
   {
     path: 'pages/mine/mine',

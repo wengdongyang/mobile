@@ -8,6 +8,7 @@ $file-server-path: '@src/';
 // #endif
 
 @mixin background-image($page-path, $url) {
-  background-image: url($file-server-path + $page-path + '/' + $url);
+  // background-image: url($file-server-path + $page-path + '/' + $url);
+  background-image: url($file-server-path + '/' + $url);
   background-repeat: no-repeat;
 }
