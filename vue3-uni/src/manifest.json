@@ -51,10 +51,20 @@
   /* 小程序特有相关 */
   "mp-weixin": {
     "appid": "wxc7af969d63e3d59e",
+    "optimization": { "subPackages": true },
     "setting": {
-      "urlCheck": false
+      "urlCheck": true,
+      "es6": true,
+      "minified": true
     },
-    "usingComponents": true
+    "usingComponents": true,
+    "permission": {
+      "scope.userLocation": {
+        "desc": "用于巡查轨迹记录"
+      }
+    },
+    "requiredBackgroundModes": ["location"],
+    "requiredPrivateInfos": ["onLocationChange", "startLocationUpdate", "getLocation", "chooseLocation", "startLocationUpdateBackground"]
   },
   "mp-alipay": {
     "usingComponents": true

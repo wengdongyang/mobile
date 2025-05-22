@@ -23,7 +23,7 @@
 
   <!-- 默认页面 -->
 </template>
-<script lang="jsx" setup>
+<script lang="jsx" name="index" setup>
 // apis
 // hooks
 // utils
