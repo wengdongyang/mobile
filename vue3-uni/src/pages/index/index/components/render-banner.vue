@@ -1,15 +1,13 @@
 <template>
-  <view class="render-banner-layout">
-    <image
-      class="banner"
-      :src="getImageUrl({ pagePath, url: 'assets/images/banner.jpg' })"
-    />
-  </view>
+  <view class="render-banner-layout"> render-banner </view>
 </template>
 <script lang="jsx" setup>
+import { onLoad, onShow } from '@dcloudio/uni-app';
+import * as lodash from 'lodash';
+import { computed, ref, watch } from 'vue';
 // apis
 // hooks
-import { useImage } from '@src/hooks'; // utils
+import { useImage } from '@src/hooks';
 // utils
 // stores
 // configs

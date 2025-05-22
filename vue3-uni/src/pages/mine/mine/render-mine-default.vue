@@ -1,5 +1,5 @@
 <template>
-  <view class="render-mine-dingding-shao-xing-layout"> render-mine-dingding-shao-xing </view>
+  <view class="render-mine-default-layout"> render-mine-default </view>
 </template>
 <script lang="jsx" setup>
 import { onLoad, onShow } from '@dcloudio/uni-app';
@@ -22,5 +22,5 @@ const props = defineProps({
 const { getImageUrl } = useImage();
 </script>
 <style lang="scss" scoped>
-@use './render-mine-dingding-shao-xing.scss';
+@use './render-mine-default.scss';
 </style>

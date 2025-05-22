@@ -1,5 +1,5 @@
 <template>
-  <view class="render-mine-dingding-ke-qiao-layout"> render-mine-dingding-ke-qiao </view>
+  <view class="render-login-dingding-layout"> render-login-dingding </view>
 </template>
 <script lang="jsx" setup>
 import { onLoad, onShow } from '@dcloudio/uni-app';
@@ -14,7 +14,7 @@ import { useImage } from '@src/hooks';
 // components
 // props
 const props = defineProps({
-  pagePath: { type: String, default: 'pages/mine/mine' },
+  pagePath: { type: String, default: 'pages/login/login' },
 });
 // emits
 // refs
@@ -22,5 +22,5 @@ const props = defineProps({
 const { getImageUrl } = useImage();
 </script>
 <style lang="scss" scoped>
-@use './render-mine-dingding-ke-qiao.scss';
+@use './render-login-dingding.scss';
 </style>

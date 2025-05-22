@@ -2,7 +2,9 @@
   <view class="render-index-weixin-layout"> render-index-weixin </view>
 </template>
 <script lang="jsx" setup>
-import { onShow } from '@dcloudio/uni-app';
+import { onLoad, onShow } from '@dcloudio/uni-app';
+import * as lodash from 'lodash';
+import { computed, ref, watch } from 'vue';
 // apis
 // hooks
 import { useImage } from '@src/hooks';
@@ -18,10 +20,6 @@ const props = defineProps({
 // refs
 // computed
 const { getImageUrl } = useImage();
-
-// onShow(() => {
-//   uni.reLaunch({ url: '/pages/index/index/index' });
-// });
 </script>
 <style lang="scss" scoped>
 @use './render-index-weixin.scss';

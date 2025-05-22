@@ -1,8 +1,5 @@
 <template>
-  <view class="render-index-dingding-layout">
-    <!-- 顶部banner -->
-    <render-banner />
-  </view>
+  <view class="render-index-dingding-layout"> render-index-dingding </view>
 </template>
 <script lang="jsx" setup>
 import { onLoad, onShow } from '@dcloudio/uni-app';
@@ -10,15 +7,19 @@ import * as lodash from 'lodash';
 import { computed, ref, watch } from 'vue';
 // apis
 // hooks
+import { useImage } from '@src/hooks';
 // utils
 // stores
 // configs
 // components
-import RenderBanner from './components/render-banner.vue';
 // props
+const props = defineProps({
+  pagePath: { type: String, default: 'pages/index/index' },
+});
 // emits
 // refs
 // computed
+const { getImageUrl } = useImage();
 </script>
 <style lang="scss" scoped>
 @use './render-index-dingding.scss';

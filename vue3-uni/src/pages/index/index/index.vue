@@ -1,7 +1,6 @@
 <template>
   <!-- #ifdef MP-WEIXIN -->
   <!-- 微信小程序 -->
-  <render-index-weixin />
   <!-- #endif -->
   <!-- #ifdef MP-WEIXIN && IS_SHAO_XING -->
   <!-- 微信小程序 && 绍兴环境 -->
@@ -12,7 +11,6 @@
 
   <!-- #ifdef H5 -->
   <!-- 浙政钉H5 -->
-  <render-index-dingding />
   <!-- #endif -->
   <!-- #ifdef H5 && IS_SHAO_XING -->
   <!-- 浙政钉H5 && 绍兴环境 -->
@@ -23,7 +21,7 @@
 
   <!-- 默认页面 -->
 </template>
-<script lang="jsx" setup>
+<script lang="jsx" name="index" setup>
 // apis
 // hooks
 // utils
@@ -34,7 +32,7 @@
 // import RenderIndexDefault from './render-index-default.vue';
 // #ifdef MP-WEIXIN
 // 默认页面 - 微信小程序
-import RenderIndexWeixin from './render-index-weixin.vue';
+// import RenderIndexWeixin from './render-index-weixin.vue';
 // #endif
 // #ifdef MP-WEIXIN && IS_SHAO_XING
 // 专属页面 - 微信小程序 - 绍兴环境
@@ -46,7 +44,7 @@ import RenderIndexWeixin from './render-index-weixin.vue';
 // #endif
 // #ifdef H5
 // 默认页面 - 浙政钉H5
-import RenderIndexDingding from './render-index-dingding.vue';
+// import RenderIndexDingding from './render-index-dingding.vue';
 // #endif
 // #ifdef H5 && IS_SHAO_XING
 // 专属页面 - 浙政钉H5 - 绍兴环境

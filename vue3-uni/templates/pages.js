@@ -48,6 +48,11 @@ const pages = [
   {
     path: 'pages/login/index',
     style: { navigationBarTitleText: '登陆' },
+    clients: [CLIENT_TARGET.DEFAULT, CLIENT_TARGET.WEIXIN],
+  },
+  {
+    path: 'pages/login/login',
+    style: { navigationBarTitleText: '登陆' },
     clients: [CLIENT_TARGET.WEIXIN, CLIENT_TARGET.DINGDING],
   },
   {
@@ -59,7 +64,7 @@ const pages = [
   {
     path: 'pages/mine/mine',
     style: { navigationBarTitleText: '我的' },
-    clients: [CLIENT_TARGET.WEIXIN, CLIENT_TARGET.DINGDING_KE_QIAO, CLIENT_TARGET.DINGDING_SHAO_XING],
+    clients: [CLIENT_TARGET.DEFAULT],
   },
   {
     path: 'pages/mine/user-info',

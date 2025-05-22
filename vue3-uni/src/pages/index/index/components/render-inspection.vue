@@ -1,11 +1,5 @@
 <template>
-  <view class="render-inspection-layout">
-    <index-card title="巡查">
-      <template #default>
-        <view class="inspection"> 隐患排查 </view>
-      </template>
-    </index-card>
-  </view>
+  <view class="render-inspection-layout"> render-inspection </view>
 </template>
 <script lang="jsx" setup>
 import { onLoad, onShow } from '@dcloudio/uni-app';
@@ -18,7 +12,6 @@ import { useImage } from '@src/hooks';
 // stores
 // configs
 // components
-import IndexCard from './index-card.vue';
 // props
 const props = defineProps({
   pagePath: { type: String, default: 'pages/index/index' },

@@ -1,5 +1,4 @@
 ## 运行方式
-yarn dev:custom dingdingShaoXing --mode dingdingShaoXing
-yarn dev:custom dingdingKeQiao --mode dingdingKeQiao
-yarn dev:custom weixinShaoXing --mode weixinShaoXing
-yarn dev:custom weixinKeQiao --mode weixinKeQiao
+yarn dev:custom keQiaoDDProd --mode keQiaoDDProd
+yarn dev:custom keQiaoDDTest --mode keQiaoDDTest
+yarn dev:custom keQiaoWX --mode keQiaoWX

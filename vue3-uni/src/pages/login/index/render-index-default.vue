@@ -1,5 +1,5 @@
 <template>
-  <view class="index-card-layout"> index-card </view>
+  <view class="render-index-default-layout"> render-index-default </view>
 </template>
 <script lang="jsx" setup>
 import { onLoad, onShow } from '@dcloudio/uni-app';
@@ -14,7 +14,7 @@ import { useImage } from '@src/hooks';
 // components
 // props
 const props = defineProps({
-  pagePath: { type: String, default: 'pages/index/index' },
+  pagePath: { type: String, default: 'pages/login/index' },
 });
 // emits
 // refs
@@ -22,5 +22,5 @@ const props = defineProps({
 const { getImageUrl } = useImage();
 </script>
 <style lang="scss" scoped>
-@use './index-card.scss';
+@use './render-index-default.scss';
 </style>

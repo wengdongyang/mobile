@@ -31,7 +31,7 @@ const templateIndexVue = ({ name }) => {
 
   <!-- 默认页面 -->
 </template>
-<script lang="jsx" setup>
+<script lang="jsx" name="${name}" setup>
 // apis
 // hooks
 // utils

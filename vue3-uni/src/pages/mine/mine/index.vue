@@ -21,7 +21,7 @@
 
   <!-- 默认页面 -->
 </template>
-<script lang="jsx" setup>
+<script lang="jsx" name="mine" setup>
 // apis
 // hooks
 // utils

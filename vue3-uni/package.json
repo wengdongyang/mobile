@@ -99,44 +99,34 @@
   },
   "uni-app": {
     "scripts": {
-      "weixinShaoXing": {
-        "title": "微信小程序&&绍兴环境",
-        "env": {
-          "UNI_PLATFORM": "mp-weixin"
-        },
-        "define": {
-          "IS_SHAO_XING": true,
-          "IS_KE_QIAO": false
-        }
-      },
-      "weixinKeQiao": {
-        "title": "微信小程序&&柯桥环境",
-        "env": {
-          "UNI_PLATFORM": "mp-weixin"
-        },
-        "define": {
-          "IS_SHAO_XING": false,
-          "IS_KE_QIAO": true
-        }
-      },
-      "dingdingShaoXing": {
-        "title": "浙政钉&&绍兴环境",
+      "keQiaoDDTest": {
+        "title": "柯桥环境&&钉钉&&测试环境",
         "env": {
           "UNI_PLATFORM": "h5"
         },
         "define": {
-          "IS_SHAO_XING": true,
-          "IS_KE_QIAO": false
+          "IS_KE_QIAO": true,
+          "IS_SHAO_XING": false
         }
       },
-      "dingdingKeQiao": {
-        "title": "浙政钉&&柯桥环境",
+      "keQiaoDDProd": {
+        "title": "柯桥环境&&钉钉&&生产环境",
         "env": {
           "UNI_PLATFORM": "h5"
         },
         "define": {
-          "IS_SHAO_XING": false,
-          "IS_KE_QIAO": true
+          "IS_KE_QIAO": true,
+          "IS_SHAO_XING": false
+        }
+      },
+      "keQiaoWX": {
+        "title": "柯桥环境&&微信小程序",
+        "env": {
+          "UNI_PLATFORM": "mp-weixin"
+        },
+        "define": {
+          "IS_KE_QIAO": true,
+          "IS_SHAO_XING": false
         }
       }
     }

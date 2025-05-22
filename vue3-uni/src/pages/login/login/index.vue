@@ -1,4 +1,5 @@
 <template>
+  <view>999</view>
   <!-- #ifdef MP-WEIXIN -->
   <!-- 微信小程序 -->
   <!-- #endif -->
@@ -21,37 +22,43 @@
 
   <!-- 默认页面 -->
 </template>
-<script lang="jsx" name="user-info" setup>
+<script lang="jsx" name="loginLogin" setup>
+import { onLoad, onShow } from '@dcloudio/uni-app';
+import * as lodash from 'lodash';
+import { computed, ref, watch } from 'vue';
 // apis
 // hooks
 // utils
 // stores
 // configs
+import { ENV, ENUMS_VERSION, ENUMS_ENVIRONMENT } from '@src/configs/index';
 // components
 // 默认页面
-// import RenderUserInfoDefault from './render-user-info-default.vue';
+// import RenderLoginDefault from './render-login-default.vue';
 // #ifdef MP-WEIXIN
 // 默认页面 - 微信小程序
-// import RenderUserInfoWeixin from './render-user-info-weixin.vue';
+// import RenderLoginWeixin from './render-login-weixin.vue';
 // #endif
 // #ifdef MP-WEIXIN && IS_SHAO_XING
 // 专属页面 - 微信小程序 - 绍兴环境
-// import RenderUserInfoWeixinShaoXing from './render-user-info-weixin-shao-xing.vue';
+// import RenderLoginWeixinShaoXing from './render-login-weixin-shao-xing.vue';
 // #endif
 // #ifdef MP-WEIXIN && IS_KE_QIAO
 // 专属页面 - 微信小程序 - 柯桥环境
-// import RenderUserInfoWeixinKeQiao from './render-user-info-weixin-ke-qiao.vue';
+// import RenderLoginWeixinKeQiao from './render-login-weixin-ke-qiao.vue';
 // #endif
 // #ifdef H5
 // 默认页面 - 浙政钉H5
-// import RenderUserInfoDingding from './render-user-info-dingding.vue';
+// import RenderLoginDingding from './render-login-dingding.vue';
 // #endif
 // #ifdef H5 && IS_SHAO_XING
 // 专属页面 - 浙政钉H5 - 绍兴环境
-// import RenderUserInfoDingdingShaoXing from './render-user-info-dingding-shao-xing.vue';
+// import RenderLoginDingdingShaoXing from './render-login-dingding-shao-xing.vue';
 // #endif
 // #ifdef H5 && IS_KE_QIAO
 // 专属页面 - 浙政钉H5 - 柯桥环境
-// import RenderUserInfoDingdingKeQiao from './render-user-info-dingding-ke-qiao.vue';
+// import RenderLoginDingdingKeQiao from './render-login-dingding-ke-qiao.vue';
 // #endif
+
+console.error(ENV, ENUMS_VERSION, ENUMS_ENVIRONMENT);
 </script>

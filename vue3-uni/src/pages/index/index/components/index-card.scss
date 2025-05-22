@@ -2,23 +2,3 @@
 $page-path: 'pages/index/index';
 // 图片demo
 // @include background-image($page-path, 'assets/images/yk_banner.png');
-.index-card-layout {
-  box-sizing: border-box;
-
-  background-color: #fff;
-  .index-card-header {
-    font-size: 32rpx;
-    font-weight: 700;
-    line-height: 44rpx;
-
-    height: 44rpx;
-    margin-bottom: 10rpx;
-
-    color: #000;
-  }
-  .index-card-content {
-    overflow: hidden;
-
-    border-radius: 20rpx;
-  }
-}
