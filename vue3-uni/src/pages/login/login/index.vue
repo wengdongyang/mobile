@@ -23,15 +23,12 @@
   <!-- 默认页面 -->
 </template>
 <script lang="jsx" name="loginLogin" setup>
-import { onLoad, onShow } from '@dcloudio/uni-app';
-import * as lodash from 'lodash';
-import { computed, ref, watch } from 'vue';
 // apis
 // hooks
 // utils
 // stores
 // configs
-import { ENV, ENUMS_VERSION, ENUMS_ENVIRONMENT } from '@src/configs/index';
+import { ENUMS_ENVIRONMENT, ENUMS_VERSION, ENV } from '@src/configs/index';
 // components
 // 默认页面
 // import RenderLoginDefault from './render-login-default.vue';

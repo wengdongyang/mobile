@@ -2,12 +2,10 @@
   <view class="render-index-default-layout"> render-index-default </view>
 </template>
 <script lang="jsx" setup>
-import { onLoad, onShow } from '@dcloudio/uni-app';
-import * as lodash from 'lodash';
-import { computed, ref, watch } from 'vue';
+import { onLoad } from '@dcloudio/uni-app';
+import qs from 'qs';
 // apis
 // hooks
-import { useImage } from '@src/hooks';
 // utils
 // stores
 // configs
@@ -19,7 +17,11 @@ const props = defineProps({
 // emits
 // refs
 // computed
-const { getImageUrl } = useImage();
+onLoad(options => {
+  uni.redirectTo({
+    url: `/pages/login/login/index?${qs.stringify(options)}`,
+  });
+});
 </script>
 <style lang="scss" scoped>
 @use './render-index-default.scss';
