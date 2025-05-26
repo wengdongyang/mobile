@@ -98,7 +98,7 @@ const { getImageUrl } = useImage();
 
 const templateScss = ({ path }) => {
   return `@import '@src/styles/mixins.scss';
-$page-path: '${path}';
+$page-path: '@${path}';
 // 图片demo
 // @include background-image($page-path, 'assets/images/yk_banner.png');`;
 };

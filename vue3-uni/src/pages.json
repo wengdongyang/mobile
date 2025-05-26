@@ -23,5 +23,5 @@
     { "path": "pages/mine/mine/index", "style": { "navigationBarTitleText": "我的" } },
     { "path": "pages/mine/user-info/index", "style": { "navigationBarTitleText": "用户信息" } }
   ],
-  "subPackages": [{ "root": "subPackages/aiChat", "pages": [{ "path": "pages/index/index/index", "style": { "navigationBarTitleText": "首页" }, "clients": ["default"] }] }]
+  "subPackages": [{ "root": "subPackages/aiChat", "pages": [{ "path": "pages/index/index", "style": { "navigationBarTitleText": "首页" }, "clients": ["default"] }] }]
 }

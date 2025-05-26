@@ -49,7 +49,7 @@ const subPackages = [
     root: 'subPackages/aiChat',
     pages: [
       {
-        path: 'pages/index/index/index',
+        path: 'pages/index/index',
         style: { navigationBarTitleText: '首页' },
         clients: [CLIENT_TARGET.DEFAULT],
       },
