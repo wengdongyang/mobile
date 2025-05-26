@@ -8,7 +8,7 @@ const { templateIndexVue, templateClientComponentVue, templateScss } = require('
 // stores
 // mixins
 // configs
-const { pages, otherPagesInfo, CLIENT_TARGET } = require('./pages.js');
+const { pages, otherPagesInfo, subPackages, CLIENT_TARGET } = require('./pages.js');
 // components
 const { kebabCase } = lodash;
 
@@ -54,6 +54,7 @@ writeFileSync(
   JSON.stringify(
     Object.assign({}, otherPagesInfo, {
       pages: pages.map(page => Object.assign({}, { path: `${page.path}/index`, style: page.style })),
+      subPackages
     }),
   ),
   true,

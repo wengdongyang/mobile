@@ -44,6 +44,19 @@ const CLIENT_TARGET = {
   DINGDING_SHAO_XING: 'dingding-shao-xing', // 浙政钉H5-绍兴
 };
 
+const subPackages = [
+  {
+    root: 'subPackages/aiChat',
+    pages: [
+      {
+        path: 'pages/index/index/index',
+        style: { navigationBarTitleText: '首页' },
+        clients: [CLIENT_TARGET.DEFAULT],
+      },
+    ],
+  },
+];
+
 const pages = [
   {
     path: 'pages/login/index',
@@ -73,4 +86,4 @@ const pages = [
   },
 ];
 
-module.exports = { otherPagesInfo, pages, CLIENT_TARGET };
+module.exports = { otherPagesInfo, pages, subPackages, CLIENT_TARGET };

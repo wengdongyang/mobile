@@ -1,18 +1,21 @@
 <template>
   <view class="render-index-weixin-layout">
     <wd-card :title="`当前是${environmentLabel}环境`">
-      <wd-radio-group
-        v-model="environment"
-        shape="dot"
-        @change="onChangeEnvironment"
-      >
-        <wd-radio
-          v-for="element in environmentList"
-          :key="element.value"
-          :value="element.value"
-          >{{ element.label }}</wd-radio
+      <view class="card-content">
+        <wd-radio-group
+          :modelValue="environment"
+          shape="dot"
+          @change="onChangeEnvironment"
         >
-      </wd-radio-group>
+          <wd-radio
+            v-for="element in environmentList"
+            :key="element.value"
+            :value="element.value"
+            >{{ element.label }}</wd-radio
+          >
+        </wd-radio-group>
+      </view>
+      <view class="card-footer"></view>
     </wd-card>
   </view>
 </template>

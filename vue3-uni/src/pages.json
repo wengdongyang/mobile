@@ -4,7 +4,7 @@
     "navigationBarTextStyle": "black",
     "navigationBarBackgroundColor": "#F8F8F8",
     "navigationBarTitleText": "基层智治综合应用·应急消防治理",
-    "backgroundColor": "#999"
+    "backgroundColor": "#F8F8F8"
   },
   "tabBar": {
     "color": "#899096",
@@ -22,5 +22,6 @@
     { "path": "pages/index/index/index", "style": { "navigationBarTitleText": "首页" } },
     { "path": "pages/mine/mine/index", "style": { "navigationBarTitleText": "我的" } },
     { "path": "pages/mine/user-info/index", "style": { "navigationBarTitleText": "用户信息" } }
-  ]
+  ],
+  "subPackages": [{ "root": "subPackages/aiChat", "pages": [{ "path": "pages/index/index/index", "style": { "navigationBarTitleText": "首页" }, "clients": ["default"] }] }]
 }

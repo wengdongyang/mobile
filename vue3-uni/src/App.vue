@@ -25,4 +25,8 @@ onHide(() => {
 
 <style lang="scss">
 /*每个页面公共css */
+page {
+  background-color: #777;
+  height: 100%;
+}
 </style>

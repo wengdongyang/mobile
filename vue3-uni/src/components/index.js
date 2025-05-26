@@ -1,0 +1,1 @@
+export { default as PageView } from './pageView/PageView.vue'
