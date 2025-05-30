@@ -4,16 +4,18 @@ import * as path from 'path';
 import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vite';
 import { viteVConsole } from 'vite-plugin-vconsole';
-export default defineConfig(async () => {
+import { qrcode } from 'vite-plugin-qrcode';
+export default defineConfig(async ({ command, mode, isSsrBuild, isPreview }) => {
   const UnoCss = await import('unocss/vite').then(i => i.default);
   return {
     plugins: [
       uni(),
+      qrcode(),
       UnoCss(),
       vueJsx(),
       viteVConsole({
         entry: path.resolve('src/main.js'),
-        enabled: true,
+        enabled: mode !== 'production',
       }),
     ],
     css: {},

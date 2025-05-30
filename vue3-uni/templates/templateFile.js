@@ -9,6 +9,7 @@ const lodash = require('lodash');
 const { upperFirst, camelCase } = lodash;
 const templateIndexVue = ({ name }) => {
   return `<template>
+  <page-view>
   <!-- #ifdef MP-WEIXIN -->
   <!-- 微信小程序 -->
   <!-- #endif -->
@@ -30,6 +31,7 @@ const templateIndexVue = ({ name }) => {
   <!-- #endif -->
 
   <!-- 默认页面 -->
+  </page-view>
 </template>
 <script lang="jsx" name="${name}" setup>
 // apis
@@ -38,6 +40,7 @@ const templateIndexVue = ({ name }) => {
 // stores
 // configs
 // components
+import { PageView } from '@src/components';
 // 默认页面
 // import ${upperFirst(camelCase(`render-${name}-default`))} from './render-${name}-default.vue';
 // #ifdef MP-WEIXIN
