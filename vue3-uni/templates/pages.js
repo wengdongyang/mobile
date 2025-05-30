@@ -71,6 +71,11 @@ const pages = [
     style: { navigationBarTitleText: '用户信息' },
     clients: [CLIENT_TARGET.DEFAULT],
   },
+  {
+    path: 'pages/aiChat/index',
+    style: { navigationBarTitleText: 'AI聊天' },
+    clients: [CLIENT_TARGET.DEFAULT],
+  },
 ];
 
 const subPackages = [
