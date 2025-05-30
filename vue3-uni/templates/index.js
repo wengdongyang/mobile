@@ -29,17 +29,17 @@ const createPages = (pages, { basePath }) => {
       }, '/pages');
 
       mkdirSync(`${basePath}/${pagePath}/components`);
-      writeFileSync(`${basePath}/${pagePath}/components/.gitkeep`, 'null not found', true);
+      writeFileSync(`${basePath}/${pagePath}/components/.gitkeep`, 'null not found');
       mkdirSync(`${basePath}/${pagePath}/assets`);
       mkdirSync(`${basePath}/${pagePath}/assets/images`);
-      writeFileSync(`${basePath}/${pagePath}/assets/.gitkeep`, 'null not found', true);
-      writeFileSync(`${basePath}/${pagePath}/assets/images/.gitkeep`, 'null not found', true);
+      writeFileSync(`${basePath}/${pagePath}/assets/.gitkeep`, 'null not found');
+      writeFileSync(`${basePath}/${pagePath}/assets/images/.gitkeep`, 'null not found');
 
       writeFileSync(`${basePath}/${pagePath}/index.vue`, templateIndexVue({ name: fileName }));
 
       Object.values(CLIENT_TARGET).forEach(clientTarget => {
         if (clients.includes(clientTarget)) {
-          writeFileSync(`${basePath}/${pagePath}/render-${fileName}-${clientTarget}.scss`, templateScss({ path: `${basePath}/${pagePath}` }), true);
+          writeFileSync(`${basePath}/${pagePath}/render-${fileName}-${clientTarget}.scss`, templateScss({ path: `${basePath}/${pagePath}` }));
           writeFileSync(
             `${basePath}/${pagePath}/render-${fileName}-${clientTarget}.vue`,
             templateClientComponentVue({ pagePath: `${basePath}/${pagePath}`, name: `render-${fileName}-${clientTarget}` }),
@@ -48,7 +48,7 @@ const createPages = (pages, { basePath }) => {
       });
 
       components.forEach(componentName => {
-        writeFileSync(`${basePath}/${pagePath}/components/${kebabCase(componentName)}.scss`, templateScss({ path: `${basePath}/${pagePath}` }), true);
+        writeFileSync(`${basePath}/${pagePath}/components/${kebabCase(componentName)}.scss`, templateScss({ path: `${basePath}/${pagePath}` }));
         writeFileSync(
           `${basePath}/${pagePath}/components/${kebabCase(componentName)}.vue`,
           templateClientComponentVue({ pagePath: `${basePath}/${pagePath}`, name: `${kebabCase(componentName)}` }),

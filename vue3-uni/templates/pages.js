@@ -75,6 +75,7 @@ const pages = [
     path: 'pages/aiChat/index',
     style: { navigationBarTitleText: 'AI聊天' },
     clients: [CLIENT_TARGET.DEFAULT],
+    components: ['chatLayout', 'renderChat', 'renderChatLoading', 'renderChatInputBox'],
   },
 ];
 

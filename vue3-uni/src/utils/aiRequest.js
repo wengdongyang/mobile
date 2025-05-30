@@ -8,7 +8,7 @@ import axiosAdapterUniapp from 'axios-adapter-uniapp';
 import { AI_TOKEN, AI_SHARE_ID, AI_TENANT_ID } from '@src/configs';
 // components
 
-const baseURL = 'http://10.2.0.56:8095';
+const baseURL = 'http://10.2.0.56:48095';
 const aiRequest = axios.create({ timeout: 1000 * 10, baseURL: baseURL, adapter: axiosAdapterUniapp });
 
 // 请求拦截器
@@ -21,7 +21,7 @@ aiRequest.interceptors.request.use(
     const nextHeaders = Object.assign(
       {},
       { shareId, sign: '', authToken: '' },
-      tenantId ? { 'tenant-id': tenantId } : { 'tenant-id': 148 },
+      tenantId ? { 'tenant-id': tenantId } : { 'tenant-id': '' },
       token ? { Authorization: `Bearer ${token}` } : {},
       headers,
     );
@@ -34,7 +34,6 @@ aiRequest.interceptors.request.use(
 // 请求完成后的拦截器
 aiRequest.interceptors.response.use(
   async response => {
-    console.error(response);
     const { status, data } = response;
     if (status === 200) {
       return Promise.resolve(data);
