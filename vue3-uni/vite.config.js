@@ -1,11 +1,21 @@
 import uni from '@dcloudio/vite-plugin-uni';
 import vueJsx from '@vitejs/plugin-vue-jsx';
+import * as path from 'path';
 import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vite';
+import { viteVConsole } from 'vite-plugin-vconsole';
 export default defineConfig(async () => {
   const UnoCss = await import('unocss/vite').then(i => i.default);
   return {
-    plugins: [uni(), UnoCss(), vueJsx()],
+    plugins: [
+      uni(),
+      UnoCss(),
+      vueJsx(),
+      viteVConsole({
+        entry: path.resolve('src/main.js'),
+        enabled: true,
+      }),
+    ],
     css: {},
     resolve: {
       alias: {
