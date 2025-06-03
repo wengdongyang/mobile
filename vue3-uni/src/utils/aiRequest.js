@@ -8,7 +8,7 @@ import axiosAdapterUniapp from 'axios-adapter-uniapp';
 import { AI_TOKEN, AI_SHARE_ID, AI_TENANT_ID, AUTH_TOKEN } from '@src/configs';
 // components
 
-const baseURL = 'http://10.2.0.56:48095';
+const baseURL = 'http://10.2.0.56:8095';
 const aiRequest = axios.create({ timeout: 1000 * 10, baseURL: baseURL, adapter: axiosAdapterUniapp });
 
 // 请求拦截器
@@ -49,4 +49,4 @@ aiRequest.interceptors.response.use(
   },
 );
 
-export { aiRequest };
+export { baseURL, aiRequest };

@@ -7,6 +7,11 @@
         :key="index"
         :obj="chatRecord.obj"
         :chatRecord="chatRecord"
+        :aiAppInfo="aiAppInfo"
+      />
+      <render-chat-loading
+        :aiAppInfo="aiAppInfo"
+        v-if="loading"
       />
     </template>
     <template #chatInputBox>
@@ -22,8 +27,8 @@
 </template>
 <script lang="jsx" name="renderIndexDefault" setup>
 import { onLoad } from '@dcloudio/uni-app';
-import { computed, ref } from 'vue';
 import { customAlphabet } from 'nanoid';
+import { ref } from 'vue';
 // apis
 // hooks
 import { useAiChatInfo, userAiChatHistoryRecords } from './hooks';
@@ -33,8 +38,9 @@ import AiServer from './aiServer';
 // configs
 // components
 import ChatLayout from './components/chat-layout.vue';
-import RenderChat from './components/render-chat.vue';
 import RenderChatInputBox from './components/render-chat-input-box.vue';
+import RenderChatLoading from './components/render-chat-loading';
+import RenderChat from './components/render-chat.vue';
 // props
 const props = defineProps({
   pagePath: { type: String, default: 'src/pages/aiChat/index' },
@@ -58,7 +64,7 @@ const { chatHistoryRecords, setChatHistoryRecords, addHumanChatRecord, addAiChat
 const initAiServer = async () => {
   try {
     AiServerRef.value = new AiServer({
-      token:'',
+      token: '',
       authToken: authToken.value,
       shareId: shareId.value || '9c086836d18d4d6286f9031491c3bfaf',
       onGetAiChatInfo,

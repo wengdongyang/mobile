@@ -3,9 +3,46 @@
     class="render-chat-layout"
     :class="obj"
   >
-    <view class="render-chat-aside"></view>
+    <view class="render-chat-aside">
+      <block v-if="obj === 'Human'">
+        <wd-img
+          class="avatar"
+          v-if="aiAppInfo.avatar"
+          :src="`${baseURL}${aiAppInfo.avatar}`"
+        >
+          <template #error>
+            <view class="error-wrap">error</view>
+          </template>
+          <template #loading>
+            <view class="loading-wrap">
+              <wd-loading />
+            </view>
+          </template>
+        </wd-img>
+      </block>
+      <block v-else>
+        <wd-img
+          class="avatar"
+          v-if="aiAppInfo.avatar"
+          :src="`${baseURL}${aiAppInfo.avatar}`"
+        >
+          <template #error>
+            <view class="error-wrap">error</view>
+          </template>
+          <template #loading>
+            <view class="loading-wrap">
+              <wd-loading />
+            </view>
+          </template>
+        </wd-img>
+      </block>
+    </view>
     <view class="render-chat-content">
-      <view class="chat-content" v-for="(content, idx) in chatRecord.value" :key="idx">
+      <view
+        class="chat-content"
+        v-for="(content, idx) in chatRecord.value"
+        :key="idx"
+      >
         <block v-if="content.type === 'text'">
           {{ content.text }}
         </block>
@@ -24,13 +61,10 @@
   </view>
 </template>
 <script lang="jsx" setup>
-import { onLoad, onShow } from '@dcloudio/uni-app';
-import * as lodash from 'lodash';
-import { computed, ref, watch } from 'vue';
 // apis
 // hooks
-import { useImage } from '@src/hooks';
 // utils
+import { baseURL } from '@src/utils';
 // stores
 // configs
 // components
@@ -39,11 +73,11 @@ const props = defineProps({
   pagePath: { type: String, default: 'src/pages/aiChat/index' },
   obj: { type: String, validator: val => ['Human', 'AI'].includes(val) },
   chatRecord: { type: Object, default: () => ({}) },
+  aiAppInfo: { type: Object, default: () => ({}) },
 });
 // emits
 // refs
 // computed
-const { getImageUrl } = useImage();
 </script>
 <style lang="scss" scoped>
 @use './render-chat.scss';

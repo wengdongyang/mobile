@@ -2,3 +2,55 @@
 $page-path: '@src/pages/aiChat/index';
 // 图片demo
 // @include background-image($page-path, 'assets/images/yk_banner.png');
+
+.render-chat-layout {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  width: 700upx;
+  padding: 20upx 25upx;
+
+  .render-chat-content {
+    max-width: 550rpx;
+    margin: 0 20rpx;
+    padding: 24rpx 32rpx;
+
+    .chat-content {
+      margin: 0 0 10upx 0;
+      font-size: 30rpx;
+      line-height: 42rpx;
+      overflow-wrap: break-word;
+    }
+  }
+  .render-chat-aside {
+    width: 56rpx;
+    height: 56rpx;
+    .avatar {
+      width: 56rpx;
+      height: 56rpx;
+    }
+  }
+
+  &.Human {
+    flex-direction: row-reverse;
+    .render-chat-content {
+      text-align: right;
+
+      color: #fff;
+      border-radius: 16rpx 0rpx 16rpx 16rpx;
+      background-color: #0b86ff;
+      box-shadow: 0rpx 2rpx 12rpx 0rpx rgba(203, 203, 203, 0.3);
+    }
+  }
+  &.AI {
+    .render-chat-content {
+      text-align: left;
+
+      color: #5d5d5d;
+      border-radius: 0rpx 16rpx 16rpx 16rpx;
+      background-color: #fff;
+      box-shadow: 0rpx 2rpx 12rpx 0rpx rgba(203, 203, 203, 0.3);
+    }
+  }
+}

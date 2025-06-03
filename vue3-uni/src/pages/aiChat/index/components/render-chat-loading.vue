@@ -1,13 +1,29 @@
 <template>
-  <view class="render-chat-loading-layout"> render-chat-loading </view>
+  <view class="render-chat-layout AI">
+    <view class="render-chat-aside">
+      <wd-img
+        class="avatar"
+        v-if="aiAppInfo.avatar"
+        :src="`${baseURL}${aiAppInfo.avatar}`"
+      >
+        <template #error>
+          <view class="error-wrap">error</view>
+        </template>
+        <template #loading>
+          <view class="loading-wrap">
+            <wd-loading />
+          </view>
+        </template>
+      </wd-img>
+    </view>
+    <view class="render-chat-content">
+      <wd-loading />
+    </view>
+  </view>
 </template>
 <script lang="jsx" setup>
-import { onLoad, onShow } from '@dcloudio/uni-app';
-import * as lodash from 'lodash';
-import { computed, ref, watch } from 'vue';
 // apis
 // hooks
-import { useImage } from '@src/hooks';
 // utils
 // stores
 // configs
@@ -15,11 +31,11 @@ import { useImage } from '@src/hooks';
 // props
 const props = defineProps({
   pagePath: { type: String, default: 'src/pages/aiChat/index' },
+  aiAppInfo: { type: Object, default: () => ({}) },
 });
 // emits
 // refs
 // computed
-const { getImageUrl } = useImage();
 </script>
 <style lang="scss" scoped>
 @use './render-chat-loading.scss';

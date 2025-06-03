@@ -2,7 +2,7 @@
   <view class="render-chat-input-box-layout">
     <view
       class="render-image-list"
-      v-show="images.length > 0"
+      v-if="images.length > 0"
     >
       <view
         class="image-item-content"
@@ -12,8 +12,6 @@
         <wd-img
           class="image"
           :src="img"
-          width="120rpx"
-          height="120rpx"
           enablePreview
         />
         <view
@@ -28,48 +26,54 @@
         </view>
       </view>
     </view>
+    <view
+      class="image-upload"
+      @click="onClickUploadImage"
+      v-else
+    >
+      <wd-icon name="image" />
+      图片/视频识别隐患
+    </view>
     <view class="render-chat-input-box-content">
-      <view
-        class="image-aside"
-        v-if="isSupportImage"
-      >
-        <wd-icon
-          name="image"
-          @click="onClickUploadImage"
-        />
-      </view>
       <view class="main-content">
         <wd-input
           type="text"
           v-model="content"
-          placeholder="请输入"
-          :disabled="loading"
+          placeholder="给绍兴应急小师爷发送消息"
+          :disabled="loading || uploadLoading"
           @confirm="onClickSend"
           no-border
         />
       </view>
       <view class="send-aside">
-        <wd-button
+        <image
+          class="icon-send"
+          :src="IconSend"
+          :loading="loading || uploadLoading"
+          @click="onClickSend"
+        />
+        <!-- <wd-button
           size="small"
           plain
-          :loading="loading"
+          :loading="loading || uploadLoading"
           @click="onClickSend"
         >
           发送
-        </wd-button>
+        </wd-button> -->
       </view>
     </view>
   </view>
 </template>
 <script lang="jsx" setup>
-import { onLoad, onShow } from '@dcloudio/uni-app';
 import * as lodash from 'lodash';
-import { computed, ref, watch } from 'vue';
+import { ref } from 'vue';
 // apis
 // hooks
 // utils
 // stores
 // configs
+import { AUTH_TOKEN } from '@src/configs';
+import IconSend from '../assets/images/icon-send.png';
 // components
 // props
 const props = defineProps({
@@ -87,6 +91,8 @@ const emit = defineEmits(['update:loading', 'clickSend']);
 // refs
 // computed
 
+const uploadLoading = ref(false); // 是否正在上传中
+
 const images = ref([]);
 const content = ref('');
 
@@ -95,7 +101,8 @@ const content = ref('');
  */
 const onClickUploadImage = () => {
   try {
-    if (props.loading) {
+    const authToken = uni.getStorageSync(AUTH_TOKEN);
+    if (props.loading || uploadLoading.value) {
       uni.showToast({ title: '请稍后再试', icon: 'none' });
     } else {
       if (images.value.length >= 1) {
@@ -105,13 +112,14 @@ const onClickUploadImage = () => {
       uni.chooseImage({
         success: res => {
           const filePath = lodash.get(res, ['tempFilePaths', 0]);
-          emit('update:loading', true);
+          uploadLoading.value = true;
           uni.uploadFile({
             url: 'http://10.2.0.56:48095/admin-api/system/fg-share/uploadFile',
             filePath: filePath,
             name: 'file',
             header: {
               shareId: props.shareId,
+              authToken,
             },
             formData: {
               bucketName: 'chat',
@@ -134,7 +142,7 @@ const onClickUploadImage = () => {
               uni.showToast({ title: '上传失败', icon: 'none' });
             },
             complete: () => {
-              emit('update:loading', false);
+              uploadLoading.value = false;
             },
           });
         },
@@ -142,6 +150,7 @@ const onClickUploadImage = () => {
     }
   } catch (error) {
     console.warn(error);
+    uploadLoading.value = false;
   }
 };
 
@@ -155,7 +164,7 @@ const onClickRemoveImage = index => {
 
 const onClickSend = () => {
   try {
-    if (props.loading) {
+    if (props.loading || uploadLoading.value) {
       uni.showToast({ title: '请稍后再试', icon: 'none' });
     } else {
       if (images.value.length > 0) {

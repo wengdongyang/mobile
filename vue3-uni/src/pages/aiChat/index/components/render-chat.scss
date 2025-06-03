@@ -5,44 +5,52 @@ $page-path: '@src/pages/aiChat/index';
 
 .render-chat-layout {
   display: flex;
-  flex-direction: column;
+  align-items: flex-start;
   justify-content: flex-start;
 
   width: 700upx;
   padding: 20upx 25upx;
-  &.Human {
-    align-items: flex-end;
-    .render-chat-content {
-      text-align: right;
 
-      border-radius: 16upx 0 16upx 16upx;
-    }
-  }
-  &.AI {
-    align-items: flex-start;
-    .render-chat-content {
-      text-align: left;
-
-      border-radius: 16upx 16upx 16upx 0;
-    }
-  }
   .render-chat-content {
     max-width: 550rpx;
-    margin: 20rpx;
+    margin: 0 20rpx;
     padding: 24rpx 32rpx;
-
-    background-color: #e1eaff;
 
     .chat-content {
       margin: 0 0 10upx 0;
-      color: #111824;
+      font-size: 30rpx;
+      line-height: 42rpx;
       overflow-wrap: break-word;
     }
   }
   .render-chat-aside {
-    width: 80upx;
-    height: 80upx;
+    width: 56rpx;
+    height: 56rpx;
+    .avatar {
+      width: 56rpx;
+      height: 56rpx;
+    }
+  }
 
-    background-color: #000;
+  &.Human {
+    flex-direction: row-reverse;
+    .render-chat-content {
+      text-align: right;
+
+      color: #fff;
+      border-radius: 16rpx 0rpx 16rpx 16rpx;
+      background-color: #0b86ff;
+      box-shadow: 0rpx 2rpx 12rpx 0rpx rgba(203, 203, 203, 0.3);
+    }
+  }
+  &.AI {
+    .render-chat-content {
+      text-align: left;
+
+      color: #5d5d5d;
+      border-radius: 0rpx 16rpx 16rpx 16rpx;
+      background-color: #fff;
+      box-shadow: 0rpx 2rpx 12rpx 0rpx rgba(203, 203, 203, 0.3);
+    }
   }
 }
