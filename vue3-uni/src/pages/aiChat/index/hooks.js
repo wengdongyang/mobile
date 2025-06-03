@@ -64,8 +64,18 @@ export const userAiChatHistoryRecords = () => {
     }
   };
 
-  const addAiChatRecord = () => {
+  const addAiChatRecord = contents => {
     try {
+      console.error(contents);
+      const nextValue = contents.map(val => {
+        const text = lodash.get(val, ['data', 'choices', '0', 'delta', 'content']);
+        return { type: 'text', text };
+      });
+      const chatRecord = {
+        obj: 'AI',
+        value: nextValue,
+      };
+      chatHistoryRecords.value.push(chatRecord);
     } catch (error) {
       console.warn(error);
     }

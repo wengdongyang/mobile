@@ -20,7 +20,7 @@
     </template>
   </chat-layout>
 </template>
-<script lang="jsx" setup>
+<script lang="jsx" name="renderIndexDefault" setup>
 import { onLoad } from '@dcloudio/uni-app';
 import { computed, ref } from 'vue';
 import { customAlphabet } from 'nanoid';
@@ -45,6 +45,7 @@ const props = defineProps({
 const AiServerRef = ref();
 
 const shareId = ref('');
+const authToken = ref('');
 
 const loading = ref(false);
 const { aiChatInfo, aiAppInfo, appId, chatId, outLinkUid, setAiChatInfo } = useAiChatInfo();
@@ -57,41 +58,38 @@ const { chatHistoryRecords, setChatHistoryRecords, addHumanChatRecord, addAiChat
 const initAiServer = async () => {
   try {
     AiServerRef.value = new AiServer({
-      token: '',
-      shareId: shareId.value || 'dd68d6d8e227408d83f5f7e0a071e656',
+      token:'',
+      authToken: authToken.value,
+      shareId: shareId.value || '9c086836d18d4d6286f9031491c3bfaf',
+      onGetAiChatInfo,
+      onBindAiChat,
       onGetChatHistoryRecords,
+      onGetChatCompletions: contents => {
+        loading.value = false;
+        addAiChatRecord(contents);
+      },
     });
-
-    const response = await AiServerRef.value.getAiChatInfo();
-
-    if (response?.code === 0) {
-      setAiChatInfo(response?.data || {});
-      await bindAiServer();
-    }
   } catch (error) {
     console.warn(error);
   }
 };
-/**
- * 绑定AI服务
- */
-const bindAiServer = async () => {
+
+const onGetAiChatInfo = async data => {
   try {
-    const aiServer = AiServerRef.value;
-    if (!aiServer || !chatId.value || !outLinkUid.value) {
-      return;
-    }
-    const { code, data, msg } = await aiServer.postAdminApiSystemFgShareBind();
-    if (code === 0) {
-      isBind.value = data;
-      await aiServer.getChatHistory();
-    } else {
-      uni.showToast({ title: msg, icon: 'none' });
-    }
+    setAiChatInfo(data);
   } catch (error) {
     console.warn(error);
   }
 };
+
+const onBindAiChat = async () => {
+  try {
+    isBind.value = true;
+  } catch (error) {
+    console.warn(error);
+  }
+};
+
 /**
  * 获取聊天历史记录回调
  * @param records
@@ -118,7 +116,7 @@ const onClickSend = async ({ type, content }) => {
     } else {
       addHumanChatRecord(content, { dataId });
     }
-    // aiServer.sendMessage(content, { dataId });
+    aiServer.sendMessage(content, { dataId });
   } catch (error) {
     console.warn(error);
   }
@@ -127,6 +125,9 @@ const onClickSend = async ({ type, content }) => {
 onLoad(option => {
   if (option?.shareId) {
     shareId.value = option.shareId;
+  }
+  if (option?.authToken) {
+    authToken.value = option.authToken;
   }
   initAiServer();
 });

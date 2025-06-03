@@ -5,7 +5,7 @@ import axiosAdapterUniapp from 'axios-adapter-uniapp';
 // types
 // stores
 // configs
-import { AI_TOKEN, AI_SHARE_ID, AI_TENANT_ID } from '@src/configs';
+import { AI_TOKEN, AI_SHARE_ID, AI_TENANT_ID, AUTH_TOKEN } from '@src/configs';
 // components
 
 const baseURL = 'http://10.2.0.56:48095';
@@ -18,11 +18,13 @@ aiRequest.interceptors.request.use(
     const token = uni.getStorageSync(AI_TOKEN);
     const shareId = uni.getStorageSync(AI_SHARE_ID);
     const tenantId = uni.getStorageSync(AI_TENANT_ID);
+    const authToken = uni.getStorageSync(AUTH_TOKEN);
     const nextHeaders = Object.assign(
       {},
-      { shareId, sign: '', authToken: '' },
+      { shareId, sign: '' },
       tenantId ? { 'tenant-id': tenantId } : { 'tenant-id': '' },
       token ? { Authorization: `Bearer ${token}` } : {},
+      authToken ? { authToken } : {},
       headers,
     );
     return Object.assign({}, config, { headers: nextHeaders });

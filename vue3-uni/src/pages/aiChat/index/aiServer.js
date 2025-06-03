@@ -1,5 +1,6 @@
 /** @format */
 import { customAlphabet } from 'nanoid';
+import * as lodash from 'lodash';
 import dayjs from 'dayjs';
 // apis
 import {
@@ -12,12 +13,21 @@ import {
 // utils
 // stores
 // configs
-import { AI_TOKEN, AI_SHARE_ID, AI_CHAT_ID } from '@src/configs';
+import { AI_TOKEN, AI_SHARE_ID, AI_CHAT_ID, AUTH_TOKEN } from '@src/configs';
 // components
+
+const tryJsonParse = str => {
+  try {
+    return JSON.parse(str);
+  } catch (error) {
+    return str;
+  }
+};
 class AiServer {
   static appId; // 应用id
 
   static token; // token
+
   static shareId; // 分享id
   static chatId; // 会话id
   static outLinkUid; // 本地id
@@ -25,17 +35,28 @@ class AiServer {
   static isBind = false; // 是否绑定好了会话
 
   constructor(props) {
-    const { token, shareId, chatId, outLinkUid, onGetChatHistoryRecords } = props;
+    const { token, shareId, chatId, outLinkUid, onGetChatHistoryList, onGetAiChatInfo, onBindAiChat, onGetChatHistoryRecords, onGetChatCompletions } = props;
     this.token = token; // token
     this.shareId = shareId; // 分享id(必填)
 
     // 必须成组出现
     this.chatId = chatId; // 会话id
     this.outLinkUid = outLinkUid; // 本地id
+
     // 必须成组出现
-    this.onGetChatHistoryRecords = onGetChatHistoryRecords;
-    this.initAiChatInfo();
+    this.onGetChatHistoryList = onGetChatHistoryList; // 获取聊天列表
+    this.onGetAiChatInfo = onGetAiChatInfo; // 获取聊天信息
+    this.onBindAiChat = onBindAiChat; // 绑定会话
+    this.onGetChatHistoryRecords = onGetChatHistoryRecords; // 获取当前聊天的聊天记录
+    this.onGetChatCompletions = onGetChatCompletions; // 获取当前聊天的回答
+    this.initAiChat();
   }
+  initAiChat = async () => {
+    await this.initAiChatInfo();
+    await this.getAiChatInfo();
+    await this.bindAiChat();
+    await this.getChatHistory();
+  };
   /**
    * 初始化
    * 存储聊天信息
@@ -63,34 +84,35 @@ class AiServer {
    */
   getAiChatInfo = async () => {
     try {
-      return new Promise(async (resolve, reject) => {
-        const { shareId, chatId, outLinkUid } = this;
-        const response = await apiGetAdminApiSystemFgShareInit({ outLinkUid, shareId, chatId });
-        const { code, data } = response;
-        if (code === 0) {
-          if (data.appId) {
-            this.appId = data.appId;
-          }
-
-          const nextChatId = data?.chatId;
-          if (!nextChatId) {
-            const nanoid = customAlphabet('abcdefghijklmnopqrstuvwxyz1234567890', 12);
-            const chatId = nanoid();
-            this.chatId = chatId;
-            uni.setStorageSync(AI_CHAT_ID, chatId);
-            resolve(Object.assign({}, response, { data: Object.assign({}, data, { chatId, outLinkUid: this.outLinkUid }) }));
-          } else {
-            this.chatId = nextChatId;
-            uni.setStorageSync(AI_CHAT_ID, nextChatId);
-            resolve(Object.assign({}, response, { data: Object.assign({}, data, { chatId, outLinkUid: this.outLinkUid }) }));
-          }
-        } else {
-          reject(response);
+      const { shareId, chatId, outLinkUid } = this;
+      const { code, data, msg } = await apiGetAdminApiSystemFgShareInit({ outLinkUid, shareId, chatId });
+      if (code === 0) {
+        if (data.appId) {
+          this.appId = data.appId;
         }
-      });
+
+        const nextChatId = data?.chatId;
+        if (!nextChatId) {
+          const nanoid = customAlphabet('abcdefghijklmnopqrstuvwxyz1234567890', 12);
+          const chatId = nanoid();
+          const aiChatInfo = Object.assign({}, data, { chatId, outLinkUid: this.outLinkUid });
+
+          uni.setStorageSync(AI_CHAT_ID, chatId);
+          this.chatId = chatId;
+          this.onGetAiChatInfo && this.onGetAiChatInfo(aiChatInfo);
+        } else {
+          const aiChatInfo = Object.assign({}, data, { chatId, outLinkUid: this.outLinkUid });
+
+          uni.setStorageSync(AI_CHAT_ID, nextChatId);
+
+          this.chatId = nextChatId;
+          this.onGetAiChatInfo && this.onGetAiChatInfo(aiChatInfo);
+        }
+      } else {
+        uni.showToast({ title: msg, icon: 'none' });
+      }
     } catch (error) {
       console.warn(error);
-      return {};
     }
   };
 
@@ -98,21 +120,18 @@ class AiServer {
    * @returns
    * 绑定会话
    */
-  postAdminApiSystemFgShareBind = async () => {
+  bindAiChat = async () => {
     try {
-      return new Promise(async (resolve, reject) => {
-        const { chatId, outLinkUid } = this;
-        const response = await apiPostAdminApiSystemFgShareBind({ outLinkUid, chatId });
-        if (response.code === 0) {
-          this.isBind = response.data;
-          resolve(response);
-        } else {
-          reject(response);
-        }
-      });
+      const { chatId, outLinkUid } = this;
+      const { code, data, msg } = await apiPostAdminApiSystemFgShareBind({ outLinkUid, chatId });
+      if (code === 0) {
+        this.isBind = data;
+        this.onBindAiChat && this.onBindAiChat();
+      } else {
+        uni.showToast({ title: msg, icon: 'none' });
+      }
     } catch (error) {
       console.warn(error);
-      return {};
     }
   };
 
@@ -157,7 +176,19 @@ class AiServer {
           stream: true,
         });
 
-        console.error(response);
+        const answer = response
+          .split('event:')
+          .filter(Boolean)
+          .map(item => {
+            const [key, value] = item.split('data:');
+            const nextKey = key.replace(/\n/gim, '');
+            const nextValueString = value.replace(/\n/gim, '');
+            const nextValue = tryJsonParse(nextValueString);
+            return { event: nextKey, data: nextValue };
+          })
+          .filter(Boolean)
+          .filter(item => ['fastAnswer', 'answer'].includes(item.event) && lodash.isObject(item.data));
+        this.onGetChatCompletions && this.onGetChatCompletions(answer);
       }
     } catch (error) {
       console.warn(error);
@@ -165,4 +196,33 @@ class AiServer {
   };
 }
 
-export default AiServer;
+class AiServerEmergencyFirefighting extends AiServer {
+  static authToken;
+  constructor(props) {
+    super(props);
+    this.authToken = props.authToken;
+  }
+  /**
+   * 初始化
+   * 存储聊天信息
+   */
+  initAiChatInfo = async () => {
+    try {
+      uni.setStorageSync(AI_TOKEN, this.token);
+      uni.setStorageSync(AI_SHARE_ID, this.shareId);
+      uni.setStorageSync(AI_CHAT_ID, this.chatId);
+      uni.setStorageSync(AUTH_TOKEN, this.authToken);
+
+      if (!this.outLinkUid) {
+        const timeStamp = dayjs().valueOf();
+        const nanoid = customAlphabet('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWSYZ1234567890', 24);
+        const outLinkUid = `shareChat-${timeStamp}-${nanoid()}`;
+        this.outLinkUid = outLinkUid;
+      }
+    } catch (error) {
+      console.warn(error);
+    }
+  };
+}
+
+export default AiServerEmergencyFirefighting;
