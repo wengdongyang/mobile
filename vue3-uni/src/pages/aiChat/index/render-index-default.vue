@@ -128,12 +128,12 @@ const onClickSend = async ({ type, content }) => {
   }
 };
 
-onLoad(option => {
-  if (option?.shareId) {
-    shareId.value = option.shareId;
+onLoad(options => {
+  if (options?.shareId) {
+    shareId.value = options.shareId;
   }
-  if (option?.authToken) {
-    authToken.value = option.authToken;
+  if (options?.authToken) {
+    authToken.value = options.authToken;
   }
   initAiServer();
 });

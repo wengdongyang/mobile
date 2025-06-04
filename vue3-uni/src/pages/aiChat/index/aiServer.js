@@ -27,6 +27,7 @@ class AiServer {
   static appId; // 应用id
 
   static token; // token
+  static authToken; // token
 
   static shareId; // 分享id
   static chatId; // 会话id
@@ -35,8 +36,9 @@ class AiServer {
   static isBind = false; // 是否绑定好了会话
 
   constructor(props) {
-    const { token, shareId, chatId, outLinkUid, onGetChatHistoryList, onGetAiChatInfo, onBindAiChat, onGetChatHistoryRecords, onGetChatCompletions } = props;
+    const { token, authToken, shareId, chatId, outLinkUid, onGetChatHistoryList, onGetAiChatInfo, onBindAiChat, onGetChatHistoryRecords, onGetChatCompletions } = props;
     this.token = token; // token
+    this.authToken = authToken; // token
     this.shareId = shareId; // 分享id(必填)
 
     // 必须成组出现
@@ -66,6 +68,7 @@ class AiServer {
       uni.setStorageSync(AI_TOKEN, this.token);
       uni.setStorageSync(AI_SHARE_ID, this.shareId);
       uni.setStorageSync(AI_CHAT_ID, this.chatId);
+      uni.setStorageSync(AUTH_TOKEN, this.authToken);
 
       if (!this.outLinkUid) {
         const timeStamp = dayjs().valueOf();
@@ -196,33 +199,5 @@ class AiServer {
   };
 }
 
-class AiServerEmergencyFirefighting extends AiServer {
-  static authToken;
-  constructor(props) {
-    super(props);
-    this.authToken = props.authToken;
-  }
-  /**
-   * 初始化
-   * 存储聊天信息
-   */
-  initAiChatInfo = async () => {
-    try {
-      uni.setStorageSync(AI_TOKEN, this.token);
-      uni.setStorageSync(AI_SHARE_ID, this.shareId);
-      uni.setStorageSync(AI_CHAT_ID, this.chatId);
-      uni.setStorageSync(AUTH_TOKEN, this.authToken);
 
-      if (!this.outLinkUid) {
-        const timeStamp = dayjs().valueOf();
-        const nanoid = customAlphabet('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWSYZ1234567890', 24);
-        const outLinkUid = `shareChat-${timeStamp}-${nanoid()}`;
-        this.outLinkUid = outLinkUid;
-      }
-    } catch (error) {
-      console.warn(error);
-    }
-  };
-}
-
-export default AiServerEmergencyFirefighting;
+export default AiServer;
