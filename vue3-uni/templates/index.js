@@ -72,13 +72,13 @@ writeFileSync(
   JSON.stringify(
     Object.assign({}, otherPagesInfo, {
       pages: pages.map(page => {
-        const { clients, path, ...rests } = page;
+        const { clients, components, path, ...rests } = page;
         return Object.assign({}, rests, { path: `${page.path}/index` });
       }),
       subPackagePages: subPackages.map(subPackage => {
         const { pages: subPackagePages } = subPackage;
         const pages = subPackagePages.map(page => {
-          const { clients, path, ...rests } = page;
+          const { clients, components, path, ...rests } = page;
           return Object.assign({}, rests, { path: `${page.path}/index` });
         });
         return Object.assign({}, subPackage, { pages });
