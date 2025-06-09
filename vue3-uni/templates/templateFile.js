@@ -74,10 +74,10 @@ const templateClientComponentVue = ({ pagePath, name }) => {
   return `<template>
   <view class="${name}-layout"> ${name} </view>
 </template>
-<script lang="jsx" setup>
+<script lang="jsx" name="${name}" setup>
 import { onLoad, onShow } from '@dcloudio/uni-app';
 import * as lodash from 'lodash';
-import { computed, ref, watch } from 'vue';
+import { computed, ref, watch, useTemplateRef } from 'vue';
 // apis
 // hooks
 import { useImage } from '@src/hooks';
@@ -87,12 +87,22 @@ import { useImage } from '@src/hooks';
 // components
 // props
 const props = defineProps({
-  pagePath: { type: String, default: '${pagePath}' },
+  pagePath: { type: String, default: 'pages/login/login' },
 });
 // emits
+const emit = defineEmits([]);
+// exposes
+defineExpose({});
 // refs
 // computed
+// hooks use
 const { getImageUrl } = useImage();
+onLoad(options => {
+  console.log('onLoad');
+});
+onShow(() => {
+  console.log('onShow');
+});
 </script>
 <style lang="scss" scoped>
 @use './${name}.scss';

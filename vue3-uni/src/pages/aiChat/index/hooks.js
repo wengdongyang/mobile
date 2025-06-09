@@ -3,7 +3,6 @@ import * as lodash from 'lodash';
 import { computed, ref, unref, watch } from 'vue';
 import { customAlphabet } from 'nanoid';
 import dayjs from 'dayjs';
-import { get } from '@vueuse/core';
 
 export const useAiChatInfo = () => {
   const aiChatInfo = ref({});

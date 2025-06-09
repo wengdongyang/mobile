@@ -19,7 +19,14 @@ const props = defineProps({
 // emits
 // refs
 // computed
+// hooks use
 const { getImageUrl } = useImage();
+onLoad(options => {
+  console.log('onLoad');
+});
+onShow(() => {
+  console.log('onShow');
+});
 </script>
 <style lang="scss" scoped>
 @use './render-login-weixin.scss';
