@@ -1,5 +1,4 @@
-import axios from 'axios';
-import axiosAdapterUniapp from 'axios-adapter-uniapp';
+import axios from 'axios-adapter-uniapp';
 import { storeToRefs } from 'pinia';
 // apis
 // hooks
@@ -15,7 +14,7 @@ const baseURL = import.meta.env.VITE_BASE_URL;
 const request = axios.create({ timeout: 1000 * 10, baseURL });
 /* #endif */
 /* #ifdef MP-WEIXIN */
-const request = axios.create({ timeout: 1000 * 10, baseURL: `${origin}${baseURL}`, adapter: axiosAdapterUniapp });
+const request = axios.create({ timeout: 1000 * 10, baseURL: `${origin}${baseURL}` });
 /* #endif */
 
 // 请求拦截器

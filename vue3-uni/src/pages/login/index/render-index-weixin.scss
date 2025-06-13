@@ -2,3 +2,6 @@
 $page-path: '@src/pages/login/index';
 // 图片demo
 // @include background-image($page-path, 'assets/images/yk_banner.png');
+.card-content {
+  margin-bottom: 20rpx;
+}

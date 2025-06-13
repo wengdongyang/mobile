@@ -28,7 +28,7 @@
 // utils
 // stores
 // configs
-import { ENUMS_ENVIRONMENT, ENUMS_VERSION, ENV } from '@src/configs/index';
+import { ENUMS_ENVIRONMENT, ENUMS_ENV_VERSION, ENV } from '@src/configs/index';
 // components
 // 默认页面
 // import RenderLoginDefault from './render-login-default.vue';
@@ -57,5 +57,5 @@ import { ENUMS_ENVIRONMENT, ENUMS_VERSION, ENV } from '@src/configs/index';
 // import RenderLoginDingdingKeQiao from './render-login-dingding-ke-qiao.vue';
 // #endif
 
-console.error(ENV, ENUMS_VERSION, ENUMS_ENVIRONMENT);
+console.error(ENV, ENUMS_ENV_VERSION, ENUMS_ENVIRONMENT);
 </script>

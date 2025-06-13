@@ -1,15 +1,4 @@
-// 环境参数
-export const ENUMS_VERSION = {
-  DEVELOP: 'develop', // 开发版
-  RELEASE: 'release', // 正式版
-  TRIAL: 'trial', // 体验版(微信小程序专属)
-};
-
-// 当前环境
-export const ENUMS_ENVIRONMENT = {
-  TESTING: 'testing', // 测试环境
-  PRODUCTION: 'production', // 生产环境
-};
+const APP_ID = import.meta.env.VITE_WEIXIN_APP_ID; // 应用ID
 // 应用名称
 const APP_NAME = import.meta.env.VITE_APP_NAME;
 // 高德地图相关参数
@@ -37,8 +26,6 @@ const VITE_PROD_REQUEST_BASE_ROUTER = import.meta.env.VITE_PROD_REQUEST_BASE_ROU
 const TEST_REQUEST_BASE_URL = `${VITE_TEST_REQUEST_BASE_URL}${VITE_TEST_REQUEST_BASE_ROUTER}/`;
 const PROD_REQUEST_BASE_URL = `${VITE_PROD_REQUEST_BASE_URL}${VITE_PROD_REQUEST_BASE_ROUTER}/`;
 
-const APP_ID = import.meta.env.VITE_WEIXIN_APP_ID; // 应用ID
-
 export const ENV = {
   APP_ID, // 应用ID
   APP_NAME, // 应用名称
@@ -49,7 +36,7 @@ export const ENV = {
   ENVIRONMENT, // 环境变量
   FILE_SOURCE_PATH, // 图片服务路径
 
-  ENV_VERSION, // 环境版本
+  ENV_VERSION, // 环境版本(开发版、体验版、正式版)
   TEST_REQUEST_BASE_URL, // 测试环境请求地址
   PROD_REQUEST_BASE_URL, // 生产环境请求地址
 };
