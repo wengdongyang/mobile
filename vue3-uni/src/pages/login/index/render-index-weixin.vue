@@ -1,8 +1,13 @@
 <template>
   <view class="render-index-weixin-layout">
-    <wd-card :title="`环境信息`">
-      <view class="card-layout">
-        <view class="card-header"> 当前是{{ environmentLabel }}环境 </view>
+    <wd-card>
+      <template #title>
+        <view class="card-header">
+          <view class="title">环境信息</view>
+          <view class="extends">当前是{{ environmentLabel }}环境</view>
+        </view>
+      </template>
+      <template #default>
         <view class="card-content">
           <wd-radio-group
             :modelValue="environment"
@@ -18,11 +23,32 @@
             </wd-radio>
           </wd-radio-group>
         </view>
-      </view>
+      </template>
     </wd-card>
-    <wd-card :title="`TOKEN`">
-      <view class="card-layout">
-        <view class="card-content"> </view>
+    <wd-card :title="`设备信息`">
+      <view class="card-content">
+        <!-- <wd-form ref="formRef">
+          <wd-cell-group border>
+            <wd-input
+              label="设备ID"
+              label-width="100px"
+              placeholder="请输入密码"
+              clearable
+            />
+            <wd-input
+              label="SEC"
+              label-width="100px"
+              placeholder="请输入密码"
+              clearable
+            />
+            <wd-input
+              label="TOKEN"
+              label-width="100px"
+              placeholder="请输入密码"
+              clearable
+            />
+          </wd-cell-group>
+        </wd-form> -->
       </view>
     </wd-card>
 
@@ -38,11 +64,12 @@ import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 import FingerprintJS from 'fingerprintjs2';
 // apis
+import { apiGetCableSignSecurity } from '@src/apis';
 // hooks
 import { useImage } from '@src/hooks';
 // utils
 // stores
-import { useStoreGlobal } from '@src/stores';
+import { useStoreGlobal, useStoreDevice, useStoreUserInfo } from '@src/stores';
 // configs
 // components
 // props
@@ -56,6 +83,10 @@ const { getImageUrl } = useImage();
 const storeGlobal = useStoreGlobal();
 const { setEnvironment } = storeGlobal;
 const { environment, environmentList, requestBaseUrl } = storeToRefs(storeGlobal);
+
+const storeDevice = useStoreDevice();
+const { setDeviceFingerprint, setDeviceSecurity } = storeDevice;
+const { deviceFingerprint, deviceSecurity } = storeToRefs(storeDevice);
 const environmentLabel = computed(() => {
   const environmentItem = lodash.find(environmentList.value, { value: environment.value });
   return environmentItem ? environmentItem.label : '';
@@ -68,10 +99,11 @@ const onChangeEnvironment = event => {
  */
 const getDeviceFingerprint = async () => {
   try {
-    FingerprintJS.get(components => {
+    FingerprintJS.get(async components => {
       const values = components.map(component => component.value);
-      const deviceId = FingerprintJS.x64hash128(values.join(''), 31);
-      console.error(deviceId)
+      const deviceFingerprint = FingerprintJS.x64hash128(values.join(''), 31);
+      await setDeviceFingerprint(deviceFingerprint);
+      const { code, data } = await apiGetCableSignSecurity();
     });
   } catch (error) {
     console.warn(error);

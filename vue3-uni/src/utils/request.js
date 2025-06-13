@@ -1,32 +1,43 @@
-import axios from 'axios-adapter-uniapp';
+import axios from 'axios';
 import { storeToRefs } from 'pinia';
+import { UniAdapter } from 'uniapp-axios-adapter';
 // apis
 // hooks
 // types
 // stores
-import { useStoreUserInfo } from '@src/stores';
+import { useStoreGlobal, useStoreDevice, useStoreUserInfo } from '@src/stores';
 // configs
+import { ENV } from '@src/configs';
 // components
-
-const origin = import.meta.env.VITE_LOCATION_ORIGIN;
-const baseURL = import.meta.env.VITE_BASE_URL;
-/* #ifdef H5 */
-const request = axios.create({ timeout: 1000 * 10, baseURL });
-/* #endif */
-/* #ifdef MP-WEIXIN */
-const request = axios.create({ timeout: 1000 * 10, baseURL: `${origin}${baseURL}` });
-/* #endif */
-
+const request = axios.create({ timeout: 1000 * 10, withCredentials: true, adapter: UniAdapter });
 // 请求拦截器
 request.interceptors.request.use(
   config => {
     const { headers = {}, url } = config;
     const storeUserInfo = useStoreUserInfo();
     const { token } = storeToRefs(storeUserInfo);
+
+    const storeGlobal = useStoreGlobal();
+    const { requestBaseUrl } = storeToRefs(storeGlobal);
+
+    const storeDevice = useStoreDevice();
+    const { deviceFingerprint, deviceSecurity } = storeToRefs(storeDevice);
+
     if (['/proxy/getGoverDingConfig'].includes(url)) {
       return config;
     }
-    return Object.assign({}, config, { headers: Object.assign({ token: token.value, platform: 'dingding' }, headers) });
+    const nextConfigs = Object.assign({}, config, {
+      baseURL: requestBaseUrl.value,
+      headers: Object.assign({}, headers, {
+        'Content-Type': 'application/json',
+        ['X-Sign-Key']: deviceFingerprint.value,
+        token: token.value,
+        platform: 'wechat',
+        appId: ENV.APP_ID,
+      }),
+    });
+    console.error(nextConfigs);
+    return nextConfigs;
   },
   error => {
     return Promise.reject(error);

@@ -17,6 +17,9 @@ export const useStoreGlobal = defineStore('storeGlobal', () => {
     ];
   });
 
+  /**
+   * 请求的地址
+   */
   const requestBaseUrl = computed(() => {
     return environment.value === ENUMS_ENVIRONMENT.TESTING ? ENV.TEST_REQUEST_BASE_URL : ENV.PROD_REQUEST_BASE_URL;
   });
@@ -35,4 +38,21 @@ export const useStoreGlobal = defineStore('storeGlobal', () => {
   };
 
   return { environment, environmentList, requestBaseUrl, setEnvironment };
+});
+
+/**
+ * 设备信息
+ */
+export const useStoreDevice = defineStore('storeDevice', () => {
+  const deviceFingerprint = ref('');
+  const deviceSecurity = ref('');
+
+  const setDeviceFingerprint = nextValue => {
+    deviceFingerprint.value = nextValue;
+  };
+
+  const setDeviceSecurity = nextValue => {
+    deviceSecurity.value = nextValue;
+  };
+  return { deviceFingerprint, deviceSecurity, setDeviceFingerprint, setDeviceSecurity };
 });

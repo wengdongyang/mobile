@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { ref, computed } from 'vue';
 // apis
 // hooks
 // types
@@ -6,5 +7,6 @@ import { defineStore } from 'pinia';
 // configs
 // components
 export const useStoreUserInfo = defineStore('userInfo', () => {
-  return {};
+  const token = ref('');
+  return { token };
 });
