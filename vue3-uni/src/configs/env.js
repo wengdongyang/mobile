@@ -6,6 +6,8 @@ const APP_NAME = import.meta.env.VITE_APP_NAME;
 // 高德地图相关参数
 const A_MAP_KEY = import.meta.env.VITE_A_MAP_KEY; // 高德地图key
 const A_MAP_SECRET = import.meta.env.VITE_A_MAP_SECRET; // 高德地图secret
+// 验签字段
+const PROFILE = import.meta.env.VITE_PROFILE; // 验签字段
 
 // #ifdef MP-WEIXIN
 // 微信小程序
@@ -52,6 +54,8 @@ const ENV = {
 
   A_MAP_KEY, // 高德地图key
   A_MAP_SECRET, // 高德地图secret
+
+  PROFILE,
 
   ENVIRONMENT, // 环境变量
   FILE_SOURCE_PATH, // 图片服务路径

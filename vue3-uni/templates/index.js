@@ -36,6 +36,7 @@ const createPages = (pages, { basePath }) => {
       writeFileSync(`${basePath}/${pagePath}/assets/images/.gitkeep`, 'null not found');
 
       writeFileSync(`${basePath}/${pagePath}/index.vue`, templateIndexVue({ name: fileName }));
+      writeFileSync(`${basePath}/${pagePath}/hooks.js`, ``);
 
       Object.values(CLIENT_TARGET).forEach(clientTarget => {
         if (clients.includes(clientTarget)) {

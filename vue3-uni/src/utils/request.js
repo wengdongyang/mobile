@@ -1,16 +1,45 @@
 import axios from 'axios';
+import CryptoJS from 'crypto-js';
+import dayjs from 'dayjs';
+import * as lodash from 'lodash';
 import { storeToRefs } from 'pinia';
 import { UniAdapter } from 'uniapp-axios-adapter';
 // apis
 // hooks
 // types
 // stores
-import { useStoreGlobal, useStoreDevice, useStoreUserInfo } from '@src/stores';
+import { useStoreDevice, useStoreGlobal, useStoreUserInfo } from '@src/stores';
 // configs
 import { ENV } from '@src/configs';
 // components
 const request = axios.create({ timeout: 1000 * 10, withCredentials: true, adapter: UniAdapter });
 // 请求拦截器
+
+export const createSignHeader = (config, secretKey) => {
+  const timestamp = dayjs().valueOf();
+  try {
+    const { method, url, data = {}, params = {} } = config;
+    const profile = ENV.PROFILE;
+    const paramsString = Object.keys(params)
+      .sort()
+      .map(key => {
+        const value = lodash.get(params, [key]) || '';
+        if (lodash.isArray(value)) {
+          return value.map((item, idx) => `${key}[${idx}]=${item}`).join('&');
+        } else {
+          return `${key}=${value}`;
+        }
+      })
+      .join('&');
+    const dataString = method.toLowerCase() === 'get' ? '' : JSON.stringify(data);
+    return {
+      signStr: `${profile}${url}?${paramsString}${secretKey}@${timestamp}|${dataString}`,
+      timestamp,
+    };
+  } catch (error) {
+    return { signStr: '', timestamp };
+  }
+};
 request.interceptors.request.use(
   config => {
     const { headers = {}, url } = config;
@@ -22,10 +51,10 @@ request.interceptors.request.use(
 
     const storeDevice = useStoreDevice();
     const { deviceFingerprint, deviceSecurity } = storeToRefs(storeDevice);
+    const { signStr, timestamp } = createSignHeader(config, deviceSecurity.value);
+    const sign = CryptoJS.MD5(signStr).toString();
+    const nextSignStr = encodeURIComponent(signStr);
 
-    if (['/proxy/getGoverDingConfig'].includes(url)) {
-      return config;
-    }
     const nextConfigs = Object.assign({}, config, {
       baseURL: requestBaseUrl.value,
       headers: Object.assign({}, headers, {
@@ -33,7 +62,10 @@ request.interceptors.request.use(
         token: token.value,
         platform: ENV.PLATFORM,
         'Content-Type': 'application/json',
+        ['X-Sign']: sign,
         ['X-Sign-Key']: deviceFingerprint.value,
+        ['X-Sign-Time']: timestamp,
+        signStr: nextSignStr.length > 100 ? nextSignStr.substring(0, 100) : nextSignStr,
       }),
     });
     console.error(nextConfigs);

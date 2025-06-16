@@ -97,7 +97,7 @@ defineExpose({});
 // computed
 // hooks use
 const { getImageUrl } = useImage();
-const pageOptions = ref({});
+const pageOptions = ref({}); // url 参数
 onLoad(options => {
   pageOptions.value = options;
   console.log('onLoad');

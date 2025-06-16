@@ -3,8 +3,7 @@
 </template>
 <script lang="jsx" name="render-login-dingding" setup>
 import { onLoad, onShow } from '@dcloudio/uni-app';
-import * as lodash from 'lodash';
-import { computed, ref, watch, useTemplateRef } from 'vue';
+import { ref } from 'vue';
 // apis
 // hooks
 import { useImage } from '@src/hooks';
@@ -24,7 +23,7 @@ defineExpose({});
 // computed
 // hooks use
 const { getImageUrl } = useImage();
-const pageOptions = ref({});
+const pageOptions = ref({}); // url 参数
 onLoad(options => {
   pageOptions.value = options;
   console.log('onLoad');
