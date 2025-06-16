@@ -1,18 +1,4 @@
 {
-  "*.js": [
-    "eslint --fix",
-    "git add"
-  ],
-  "*.css": [
-    "csscomb -c .csscomb.json",
-    "git add"
-  ],
-  "*.scss": [
-    "csscomb -c .csscomb.json",
-    "git add"
-  ],
-  "*.less": [
-    "csscomb -c .csscomb.json",
-    "git add"
-  ]
+  "*.{css,less,scss}": ["csscomb -c .csscomb.json", "git add"],
+  "*.{js,jsx,ts,tsx,json,md,html,vue,css,less,scss}": ["prettier --write", "git add"]
 }

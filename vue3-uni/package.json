@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "husky:init": "husky init",
-    "format:css": "csscomb -c .csscomb.json",
+    "prettier": "prettier --write .",
+    "csscomb": "csscomb -c .csscomb.json .",
     "fs": "node templates/index.js",
     "dev:app": "uni -p app",
     "dev:app-android": "uni -p app-android",

@@ -16,6 +16,14 @@ onLaunch(() => {
   initEnv();
 });
 onShow(() => {
+
+
+
+
+
+
+
+  
   console.info('App Show');
 });
 onHide(() => {
