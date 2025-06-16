@@ -5,14 +5,18 @@ $page-path: '@src/pages/login/index';
 .card-header {
   display: flex;
   align-items: center;
+
   justify-content: space-between;
+
   line-height: 48rpx;
   .title {
     font-size: 32rpx;
+
     color: #333;
   }
   .extends {
     font-size: 24rpx;
+
     color: #999;
   }
 }

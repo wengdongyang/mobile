@@ -2,6 +2,8 @@
   "name": "uni-preset-vue",
   "version": "0.0.0",
   "scripts": {
+    "husky:init": "husky init",
+    "format:css": "csscomb -c .csscomb.json",
     "fs": "node templates/index.js",
     "dev:app": "uni -p app",
     "dev:app-android": "uni -p app-android",
@@ -90,7 +92,10 @@
     "@dcloudio/vite-plugin-uni": "3.0.0-alpha-4060720250515001",
     "@vitejs/plugin-vue-jsx": "^4.2.0",
     "@vue/runtime-core": "^3.5.14",
+    "csscomb": "^4.3.0",
     "fs": "^0.0.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.2",
     "prettier": "^3.5.3",
     "sass": "~1.32.13",
     "sass-loader": "^16.0.5",
@@ -135,6 +140,16 @@
         }
       }
     }
+  },
+  "lint-staged": {
+    "*.{css,less,scss}": [
+      "csscomb -c .csscomb.json",
+      "git add"
+    ],
+    "*.{js,jsx,ts,tsx,json,md,html,css,less,scss}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
 }

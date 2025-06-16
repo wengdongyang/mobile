@@ -1,0 +1,18 @@
+{
+  "*.js": [
+    "eslint --fix",
+    "git add"
+  ],
+  "*.css": [
+    "csscomb -c .csscomb.json",
+    "git add"
+  ],
+  "*.scss": [
+    "csscomb -c .csscomb.json",
+    "git add"
+  ],
+  "*.less": [
+    "csscomb -c .csscomb.json",
+    "git add"
+  ]
+}
