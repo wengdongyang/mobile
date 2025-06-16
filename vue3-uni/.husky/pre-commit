@@ -1,4 +1,12 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
 
-npx lint-staged
+# 强制要求运行 lint-staged
+if ! npx lint-staged; then
+  echo ""
+  echo "❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌"
+  echo "❌ 错误：必须运行 lint-staged 才能提交！"
+  echo "❌ 请修复上述错误后再试"
+  echo "❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌"
+  exit 1
+fi
