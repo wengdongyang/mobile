@@ -1,8 +1,11 @@
 .safe-padding {
   padding-bottom: constant(safe-area-inset-bottom);
+  color: #000;
   padding-bottom: env(safe-area-inset-bottom);
 
   box-sizing: content-box;
+  background-color: #888;
+  position: absolute;
 }
 /*  #ifdef  H5  */
 body {

@@ -142,15 +142,5 @@
       }
     }
   },
-  "lint-staged": {
-    "*.{css,less,scss}": [
-      "csscomb -c .csscomb.json",
-      "git add"
-    ],
-    "*.{js,jsx,ts,tsx,json,md,html,vue,css,less,scss}": [
-      "prettier --write",
-      "git add"
-    ]
-  },
   "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
 }

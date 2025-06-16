@@ -1,19 +1,24 @@
+@import '@src/styles/mixins.scss';
+// $page-path: '@src/pages/mine/mine';
+// 图片demo
+// @include background-image($page-path, 'assets/images/yk_banner.png');
 .card-header {
   display: flex;
 
   align-items: center;
   justify-content: space-between;
   line-height: 48rpx;
+  position: absolute;
 
   .title {
     font-size: 32rpx;
-    color: #333;
-  }
+    color: #FFF;
+    }
   .extends {
     font-size: 24rpx;
     color: #999;
+    }
   }
-}
 .card-content {
   padding-bottom: 20rpx;
-}
+  }

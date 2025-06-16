@@ -16,11 +16,9 @@ onLaunch(() => {
   initEnv();
 });
 onShow(() => {
-  
-  
   console.info('App Show');
 
-
+  console.info('App Show2');
 
   console.info('App Show');
 });
