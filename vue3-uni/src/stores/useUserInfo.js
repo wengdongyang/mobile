@@ -8,5 +8,8 @@ import { ref, computed } from 'vue';
 // components
 export const useStoreUserInfo = defineStore('userInfo', () => {
   const token = ref('');
-  return { token };
+  const setToken = nextValue => {
+    token.value = nextValue;
+  };
+  return { token, setToken };
 });

@@ -1,10 +1,10 @@
 <template>
   <view class="render-login-weixin-layout"> render-login-weixin </view>
 </template>
-<script lang="jsx" setup>
+<script lang="jsx" name="render-login-weixin" setup>
 import { onLoad, onShow } from '@dcloudio/uni-app';
 import * as lodash from 'lodash';
-import { computed, ref, watch } from 'vue';
+import { computed, ref, watch, useTemplateRef } from 'vue';
 // apis
 // hooks
 import { useImage } from '@src/hooks';
@@ -17,11 +17,16 @@ const props = defineProps({
   pagePath: { type: String, default: 'pages/login/login' },
 });
 // emits
+const emit = defineEmits([]);
+// exposes
+defineExpose({});
 // refs
 // computed
 // hooks use
 const { getImageUrl } = useImage();
+const pageOptions = ref({});
 onLoad(options => {
+  pageOptions.value = options;
   console.log('onLoad');
 });
 onShow(() => {

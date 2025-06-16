@@ -1,6 +1,5 @@
 // 版本信息
 export const ENUMS_ENV_VERSION = {
-  DEVELOP: 'develop', // 开发版
   RELEASE: 'release', // 正式版
   TRIAL: 'trial', // 体验版(微信小程序专属)
 };

@@ -29,11 +29,11 @@ request.interceptors.request.use(
     const nextConfigs = Object.assign({}, config, {
       baseURL: requestBaseUrl.value,
       headers: Object.assign({}, headers, {
+        appId: ENV.APP_ID,
+        token: token.value,
+        platform: ENV.PLATFORM,
         'Content-Type': 'application/json',
         ['X-Sign-Key']: deviceFingerprint.value,
-        token: token.value,
-        platform: 'wechat',
-        appId: ENV.APP_ID,
       }),
     });
     console.error(nextConfigs);

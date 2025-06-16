@@ -48,7 +48,7 @@ const pages = [
   {
     path: 'pages/login/index',
     style: { navigationBarTitleText: '登陆' },
-    clients: [CLIENT_TARGET.DEFAULT, CLIENT_TARGET.WEIXIN],
+    clients: [CLIENT_TARGET.DEFAULT],
   },
   {
     path: 'pages/login/login',
