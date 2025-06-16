@@ -2,9 +2,9 @@
   "name": "uni-preset-vue",
   "version": "0.0.0",
   "scripts": {
-    "husky:init": "husky init",
+    "prepare": "husky",
     "prettier": "prettier --write .",
-    "csscomb": "csscomb -c .csscomb.json .",
+    "csscomb": "csscomb",
     "fs": "node templates/index.js",
     "dev:app": "uni -p app",
     "dev:app-android": "uni -p app-android",
