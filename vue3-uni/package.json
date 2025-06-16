@@ -147,7 +147,7 @@
       "csscomb -c .csscomb.json",
       "git add"
     ],
-    "*.{js,jsx,ts,tsx,json,md,html,css,less,scss}": [
+    "*.{js,jsx,ts,tsx,json,md,html,vue,css,less,scss}": [
       "prettier --write",
       "git add"
     ]
