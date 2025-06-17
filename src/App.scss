@@ -1,26 +1,12 @@
 .safe-padding {
-  position: absolute;
-
-  overflow: hidden;
-
-  box-sizing: content-box;
   padding-bottom: constant(safe-area-inset-bottom);
-  color: #000;
+
   padding-bottom: env(safe-area-inset-bottom);
 
-  overflow: hidden;
-  text-align: center;
-
-  color: #000;
-  background-color: #888;
+  box-sizing: content-box;
 }
 /*  #ifdef  H5  */
 body {
   overflow: hidden;
-  color: red;
-  margin: 10px;
-  background: blue;
-  padding: 20px;
-  display: block;
 }
 /*  #endif  */
