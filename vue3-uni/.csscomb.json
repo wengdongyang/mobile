@@ -1,6 +1,0 @@
-{
-  "always-semicolon": true,
-  "color-case": "lower",
-  "block-indent": "  ",
-  "sort-order": [["$variables", "@include", "@extend"], "position", "top", "left", "display", "width", "height"]
-}

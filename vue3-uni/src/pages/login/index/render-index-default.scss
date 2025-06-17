@@ -3,23 +3,26 @@
 // 图片demo
 // @include background-image($page-path, 'assets/images/yk_banner.png');
 .card-header {
-  display: flex;
-
-  align-items: center;
-  justify-content: space-between;
-  line-height: 48rpx;
   position: absolute;
+  
+
+  display: flex;
+  align-items: center;
+  position: absolute;
+  justify-content: space-between;
 
   .title {
     font-size: 32rpx;
-    color: #FFF;
-    background: #FFF;
-    }
+
+    color: #fff;
+    background: #fff;
+  }
   .extends {
     font-size: 24rpx;
+
     color: #999;
-    }
   }
+}
 .card-content {
   padding-bottom: 20rpx;
-  }
+}
