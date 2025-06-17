@@ -2,7 +2,7 @@
 . "$(dirname "$0")/_/husky.sh"
 
 # 强制要求运行 lint-staged
-if ! npx lint-staged; then
+if !npx lint-staged; then
   echo ""
   echo "❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌"
   echo "❌ 错误：必须运行 lint-staged 才能提交！"
@@ -10,3 +10,5 @@ if ! npx lint-staged; then
   echo "❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌"
   exit 1
 fi
+
+npx lint-staged
