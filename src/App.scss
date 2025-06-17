@@ -1,6 +1,9 @@
 .safe-padding {
   padding-bottom: constant(safe-area-inset-bottom);
   color: #000;
+  
+  text-align: center;
+
   padding-bottom: env(safe-area-inset-bottom);
 
   box-sizing: content-box;
