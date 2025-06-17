@@ -10,6 +10,8 @@ import { useEnv } from '@src/hooks';
 // configs
 // components
 const { initEnv } = useEnv();
+// 未格式化的 JS
+function example(){console.log('原始格式');const obj={a:1,b:2};return obj;}
 
 onLaunch(() => {
   console.info('App Launch');

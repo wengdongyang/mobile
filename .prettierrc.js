@@ -9,4 +9,10 @@ module.exports = {
   jsxSingleQuote: true,
   bracketSpacing: true,
   singleAttributePerLine: true,
+  overrides: [
+    {
+      files: ['*.css', '*.scss', '*.less'],
+      options: { parser: 'css' },
+    },
+  ],
 };

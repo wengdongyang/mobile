@@ -1,5 +1,4 @@
 {
-  "*.{md,html}": ["prettier --write", "git add"],
-  "*.{css,less,scss}": ["prettier --write", "git add"],
-  "*.{js,jsx,ts,tsx,json}": ["prettier --write", "git add"]
+  "*.{js,ts,jsx,tsx,json,md}": "prettier --write",
+  "*.{css,scss,less}": ["csscomb --fix", "prettier --write"]
 }
